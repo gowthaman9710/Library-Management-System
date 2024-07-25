@@ -355,7 +355,9 @@ if(sessionStorage.validate=="success" && localStorage.getItem(user1a)==pass1a){
     },7000)
 }
 }
+if(localStorage.getItem("FNAME")!=null){
 localStorage.setItem("FNAME",localStorage.getItem("FNAME").split(","))
+}
 //--------------------------------------
 //--------------------------------------
 //borrow books

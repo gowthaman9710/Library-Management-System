@@ -387,9 +387,12 @@ function signup() {
   }
 }
 
-localStorage.setItem("FNAME", localStorage.getItem("FNAME").split(",")); //--------------------------------------
+if (localStorage.getItem("FNAME") != null) {
+  localStorage.setItem("FNAME", localStorage.getItem("FNAME").split(","));
+} //--------------------------------------
 //--------------------------------------
 //borrow books
+
 
 console.log(location.href);
 
