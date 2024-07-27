@@ -97,7 +97,8 @@ if(localStorage.status=="success" && sessionStorage.validate=="success"){
 }
 console.log(localStorage.status)
 console.log(localStorage.length)
-console.log(localStorage.getItem("USERNAMES").split(",").length)
+
+//console.log(localStorage.getItem("USERNAMES").split(",").length)
 // let a=localStorage.getItem("FNAME")
 // localStorage.setItem("FNAME",`[${a}]`)
 
