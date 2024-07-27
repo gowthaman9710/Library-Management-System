@@ -120,27 +120,29 @@ function login() {
     // let dbusers=Array.from(db.keys())
     // let dbvalues=Array.from(db.values())
     // console.log(dbusers,dbvalues)
-    for (var i = 0; i < localStorage.getItem("USERNAMES").split(",").length; i++) {
-      if (localStorage.getItem("USERNAMES").split(",").includes(user) == true) {
-        useravail = true;
+    if (localStorage.getItem("USERNAMES") != null) {
+      for (var i = 0; i < localStorage.getItem("USERNAMES").split(",").length; i++) {
+        if (localStorage.getItem("USERNAMES").split(",").includes(user) == true) {
+          useravail = true;
 
-        if (localStorage.getItem("PASSWORDS").includes(pass) == true) {
-          if (localStorage.getItem("PASSWORDS").split(",")[i] == pass && localStorage.getItem("USERNAMES").split(",")[i] == user) {
-            localStorage.setItem("status", "success");
-            sessionStorage.setItem("validate", "success");
-            localStorage.setItem("currentUser", user); // localStorage.setItem(dbusers[i],dbvalues[i])
+          if (localStorage.getItem("PASSWORDS").includes(pass) == true) {
+            if (localStorage.getItem("PASSWORDS").split(",")[i] == pass && localStorage.getItem("USERNAMES").split(",")[i] == user) {
+              localStorage.setItem("status", "success");
+              sessionStorage.setItem("validate", "success");
+              localStorage.setItem("currentUser", user); // localStorage.setItem(dbusers[i],dbvalues[i])
 
-            flag = true;
-            break;
+              flag = true;
+              break;
+            } else {
+              // localStorage.clear()
+              flag = false;
+            }
           } else {
-            // localStorage.clear()
             flag = false;
           }
         } else {
-          flag = false;
+          useravail = false;
         }
-      } else {
-        useravail = false;
       }
     }
 

@@ -109,6 +109,7 @@ function validate(){
     // let dbusers=Array.from(db.keys())
     // let dbvalues=Array.from(db.values())
     // console.log(dbusers,dbvalues)
+if(localStorage.getItem("USERNAMES")!=null){
 for(let i=0;i<localStorage.getItem("USERNAMES").split(",").length;i++){
 if(localStorage.getItem("USERNAMES").split(",").includes(user)==true){
     useravail=true
@@ -131,6 +132,7 @@ else{
 }else{
      
     useravail=false
+}
 }
 }
 if(useravail==true){
