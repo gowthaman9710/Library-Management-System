@@ -3,7 +3,7 @@
 function nav(){
     let flag
     if(sessionStorage.validate!="success"){
-        location.href="https://gowthaman9710.github.io/Library-Management-System/login.html"
+        location.href="./login.html"
     }
 let mainlog=document.getElementById("mlog")
 let mainsignup=document.getElementById("msignup")
@@ -19,12 +19,12 @@ let mlogout=document.getElementById("mlogout")
 mlogout.addEventListener("click",()=>{
     localStorage.status="failure"
     sessionStorage.validate="failure"
-    location.href="https://gowthaman9710.github.io/Library-Management-System/login.html"
+    location.href="./login.html"
 })
 let borrowbooks=document.getElementById("borrowbooks")
 borrowbooks.addEventListener("click",()=>{
     console.log("event occurs")
-     location.href="https://gowthaman9710.github.io/Library-Management-System/borrowbooks.html"
+     location.href="./borrowbooks.html"
 })
 let returnbooks=document.getElementById("returnbooks")
 returnbooks.addEventListener("click",()=>{
@@ -39,8 +39,8 @@ invent.addEventListener("click",()=>{
     location.href="./inventory.html"
 })
 }
-
-if(location.href=="https://gowthaman9710.github.io/Library-Management-System/login.html" || location.href=="https://gowthaman9710.github.io/Library-Management-System/login.html#"){
+console.log(location.pathname)
+if(location.pathname=="/login.html" || location.pathname=="/login.html#"){
     login()
 }             
 function login(){
@@ -61,7 +61,8 @@ let passnull=true
 if(sessionStorage.validate!="success"){
     localStorage.status="failure"
 }
-if(location.href=="https://gowthaman9710.github.io/Library-Management-System/login.html" || location.href=="https://gowthaman9710.github.io/Library-Management-System/login.html#"){
+
+if(location.pathname=="/login.html" || location.pathname=="/login.html#"){
 try{
 user2.addEventListener("keyup",()=>{
       getUser(user2)
@@ -87,7 +88,7 @@ submit2.addEventListener("click",()=>{
 })
 if(localStorage.status=="success" && sessionStorage.validate=="success"){
         localStorage.setItem("flag",true)
-        location.href="https://gowthaman9710.github.io/Library-Management-System/main.html"
+        location.href="./main.html"
 }else{
     sessionStorage.setItem("validate","failure") 
 }
@@ -155,7 +156,7 @@ if(flag==true && localStorage.status=="success"){
     warning.classList.add("warninglog")
     warning.innerHTML="<p>Invalid password</p>"
     // setTimeout(()=>{
-    //     location.href="https://gowthaman9710.github.io/Library-Management-System/login.html"
+    //     location.href="./login.html"
     //  },3000)
     }
 }
@@ -182,23 +183,23 @@ if(localStorage.status=="success"){
 if(location.pathname=="/main.html"){
     nav()
      if(localStorage.status!="success" && sessionStorage.validate!="success"){
-        location.href="https://gowthaman9710.github.io/Library-Management-System/login.html"
+        location.href="./login.html"
     }
 }
 
 // if(flag==false){
-//     location.href="https://gowthaman9710.github.io/Library-Management-System/login.html"
+//     location.href="./login.html"
 //     break
 // }
 // else{
-//     location.href="https://gowthaman9710.github.io/Library-Management-System/main.html"
+//     location.href="./main.html"
 // }
 
 //-----------------------------------------------------------//
 //-------------------------signup----------------------------//
 // let db1=[]
 // let map1=new Map()
-if(location.href=="https://gowthaman9710.github.io/Library-Management-System/signup.html" || location.href=="https://gowthaman9710.github.io/Library-Management-System/signup.html#"){
+if(location.pathname=="/signup.html" || location.pathname=="/signup.html#"){
       signup()
 }
 function signup(){
@@ -354,7 +355,7 @@ function storeinfo(){
 }
 if(sessionStorage.validate=="success" && localStorage.getItem(user1a)==pass1a){
     setTimeout(()=>{
-        location.href="https://gowthaman9710.github.io/Library-Management-System/main.html"
+        location.href="./main.html"
     },7000)
 }
 }
@@ -365,7 +366,7 @@ localStorage.setItem("FNAME",localStorage.getItem("FNAME").split(","))
 //--------------------------------------
 //borrow books
 console.log(location.href)
-if(location.href=="https://gowthaman9710.github.io/Library-Management-System/borrowbooks.html" || location.href=="https://gowthaman9710.github.io/Library-Management-System/borrowbooks.html#"){
+if(location.pathname=="/borrowbooks.html" || location.pathname=="/borrowbooks.html#"){
     nav()
     borrowbooks()
 }  
@@ -1089,7 +1090,7 @@ function submitBook(){
         localStorage.status="failure"
     }
     if(localStorage.status!="success" && sessionStorage.validate!="success"){
-        location.href="https://gowthaman9710.github.io/Library-Management-System/login.html"
+        location.href="./login.html"
     }
     addEventListener("keypress",()=>{
         msg.classList.add("inv")
@@ -1146,7 +1147,7 @@ if(submitted==false){
 
   //calling  navbar function
 // if(sessionStorage.length<=1 && sessionStorage.key(0)=="IsThisFirstTime_Log_From_LiveServer" && sessionStorage.validate!="success"){
-//      location.href="https://gowthaman9710.github.io/Library-Management-System/login.html"
+//      location.href="./login.html"
 // }
 
 // fetch("./data.json")
@@ -1158,7 +1159,7 @@ if(submitted==false){
 
 //-------------------------------------------------return books---------------------------------------------//
 
-if(location.href=="https://gowthaman9710.github.io/Library-Management-System/return.html" || location.href=="https://gowthaman9710.github.io/Library-Management-System/return.html#"){
+if(location.pathname=="/return.html" || location.pathname=="/return.html#"){
    nav()
    if(sessionStorage.getItem("validate")!="success"){
      location.href="./login.html"
@@ -1297,7 +1298,7 @@ if(location.href=="https://gowthaman9710.github.io/Library-Management-System/ret
 /** asdfgf ;lkjhj  */
 }
 //inventory
-if(location.href=="https://gowthaman9710.github.io/Library-Management-System/inventory.html" || location.href=="https://gowthaman9710.github.io/Library-Management-System/inventory.html#"){
+if(location.pathname=="/inventory.html" || location.pathname=="/inventory.html#"){
 let table=document.getElementById("tab")
 for(let i=0;i<JSON.parse(localStorage.getItem("books")).length;i++){
     let rows=document.createElement("tr")
