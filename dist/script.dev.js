@@ -5,7 +5,7 @@ function nav() {
   var flag;
 
   if (sessionStorage.validate != "success") {
-    location.href = "./login.html";
+    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html";
   }
 
   var mainlog = document.getElementById("mlog");
@@ -24,24 +24,24 @@ function nav() {
   mlogout.addEventListener("click", function () {
     localStorage.status = "failure";
     sessionStorage.validate = "failure";
-    location.href = "./login.html";
+    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html";
   });
   var borrowbooks = document.getElementById("borrowbooks");
   borrowbooks.addEventListener("click", function () {
     console.log("event occurs");
-    location.href = "./borrowbooks.html";
+    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/borrowbooks.html";
   });
   var returnbooks = document.getElementById("returnbooks");
   returnbooks.addEventListener("click", function () {
-    location.href = "./return.html";
+    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/return.html";
   });
   var history = document.getElementById("history");
   history.addEventListener("click", function () {
-    location.href = "./history.html";
+    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/history.html";
   });
   var invent = document.getElementById("invent");
   invent.addEventListener("click", function () {
-    location.href = "./inventory.html";
+    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/inventory.html";
   });
 }
 
@@ -102,7 +102,7 @@ function login() {
 
       if (localStorage.status == "success" && sessionStorage.validate == "success") {
         localStorage.setItem("flag", true);
-        location.href = "./main.html";
+        location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/main.html";
       } else {
         sessionStorage.setItem("validate", "failure");
       }
@@ -167,7 +167,7 @@ function login() {
 
           warning.classList.add("warninglog");
           warning.innerHTML = "<p>Invalid password</p>"; // setTimeout(()=>{
-          //     location.href="./login.html"
+          //     location.href="https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html"
           //  },3000)
         }
       }
@@ -194,14 +194,14 @@ if (location.pathname == "/main.html") {
   nav();
 
   if (localStorage.status != "success" && sessionStorage.validate != "success") {
-    location.href = "./login.html";
+    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html";
   }
 } // if(flag==false){
-//     location.href="./login.html"
+//     location.href="https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html"
 //     break
 // }
 // else{
-//     location.href="./main.html"
+//     location.href="https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/main.html"
 // }
 //-----------------------------------------------------------//
 //-------------------------signup----------------------------//
@@ -386,7 +386,7 @@ function signup() {
 
   if (sessionStorage.validate == "success" && localStorage.getItem(user1a) == pass1a) {
     setTimeout(function () {
-      location.href = "./main.html";
+      location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/main.html";
     }, 7000);
   }
 }
@@ -1025,7 +1025,7 @@ function borrowbooks() {
       }
 
       if (localStorage.status != "success" && sessionStorage.validate != "success") {
-        location.href = "./login.html";
+        location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html";
       }
 
       addEventListener("keypress", function () {
@@ -1208,7 +1208,7 @@ if (location.pathname == "/return.html" || location.pathname == "/return.html#")
   nav();
 
   if (sessionStorage.getItem("validate") != "success") {
-    location.href = "./login.html";
+    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html";
   }
 
   bookdbcreation();
