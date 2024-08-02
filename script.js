@@ -167,7 +167,7 @@ if(flag==true && localStorage.status=="success"){
         warning.innerHTML="<p>Please enter your username</p>"
     }else{
     warning.classList.remove("successlog")
-    warning.classList.add("")
+    warning.classList.add("#")
     warning.innerHTML="<p>This username doesn't exist</p>"
     }
 }
