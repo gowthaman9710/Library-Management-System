@@ -558,7 +558,7 @@ console.log(records1)
 let val
 ///////////////////////////////////////////////////////////
 let current=[]                                            //
-current[0]=localStorage.getItem("records")                 //      
+current[0]=localStorage.getItem("records")                 //
 localStorage.setItem("current",current[0])                  //         
 console.log(current)                                        //
 if(current[0]<localStorage.getItem("current")){             //
@@ -569,7 +569,7 @@ let quantityreduce
 if(localStorage.getItem("quantityreduce")==null){
     quantityreduce=[]
     localStorage.setItem(`quantityreduce`,quantityreduce)
-}    
+}
 if(localStorage.getItem("totalrecords")!=null){
 console.log(/*localStorage.getItem("records"),*/JSON.parse(localStorage.getItem("totalrecords")).length)
 }
@@ -628,50 +628,8 @@ for(let i=0;i<records1.length*20;i++){
 }
 addquantity()
      
-     //else{
-//         if(localStorage.getItem(`quantityreduce${i},${j}`)=="success"){
-            // quantities[j]+=1
-            // backup[j].quantity=quantities[j]
-            // localStorage.setItem(`quantityreduce${i},${j}`,"failure")
-            // localStorage.setItem("books",JSON.stringify(backup))
-//     }
-//   }
 
-//--------------------------------------------------------------------------------------
-// for(let i=0;i<booknames.length;i++){
-//     for(let j=0;j<records.length;j++){
-//       if(records[j].bookName!=booknames[i] && records[j].bookAuthor!=authornames[i]){
-//         if(localStorage.getItem(`quantityreduce${j},${i}`)=="success"){
-//             quantities[i]+=1
-//             backup[i].quantity=quantities[i]
-//             localStorage.setItem(`quantityreduce${j},${i}`,"failure")
-//             localStorage.setItem("books",JSON.stringify(backup))
-//         }
-//       }
-//     }
-// }
-//----------------------------------------------------------------------------------------
-//-----------------------------------------------------------------
-// for(let i=0;i<records.length;i++){
-//     for(let j=0;j<booknames.length;j++){
-//    if(records[i].bookName!=booknames[j] && records[i].bookAuthor!=authornames[j]){
-//    if(localStorage.getItem(`quantityreduce${i},${j}`)!="success"){
-//     quantities[j]=books[j].quantity
-//     backup[j].quantity=quantities[j]
-//     localStorage.setItem(`quantityreduce${i},${j}`,"failure")
-//     localStorage.setItem("books",JSON.stringify(backup))
-//     }
-//    }else{
-//     if(localStorage.getItem(`quantityreduce${j}`)!="success" || localStorage.getItem(`differentrecord${i}`)!="success"){
-//     //    quantities[j]-=1
-//     // backup[j].quantity=quantities[j]
-//     // localStorage.setItem(`differentrecord${i}`,"success")
-//     // localStorage.setItem(`quantityreduce${j}`,"success")
-//     // localStorage.setItem("books",JSON.stringify(backup))
-//     }
-//    }
-//   }
-//  }
+
 //------------------------------------------------------------------
 if(records1.length<1){
     localStorage.setItem("books",JSON.stringify(backup))
@@ -802,17 +760,6 @@ bksubmit.addEventListener("click",()=>{
     }else{
         fields=false
     } 
-// if(submission==false){
-//         msg.classList.add("warningbk")
-//         msg.classList.remove("vis")
-//         msg.classList.remove("inv")
-//         msg.innerText="PLEASE FILL ALL THE ABOVE FIELD"
-//         setTimeout(()=>{
-//         msg.classList.add("inv")
-//         msg.classList.remove("vis")
-//         newptag.remove()                      /**  */
-//         },8000)
-//     }
 
     if(fields==false){
         msg.classList.add("warningbk")
@@ -868,7 +815,6 @@ function submitBook(){
     let bks
     let bkscheck=[]
     let authcheck=[]
-    let submitted
     let strecord=new Map()
     console.log(booknames)
     console.log(bookname)
@@ -880,20 +826,7 @@ function submitBook(){
             console.log(bkscheck)
         }
     }
-    // for(let i=0;i<bi.length;i++){
-    //     if(booknames.indexOf(booknames[i],i)==bi[i]){
-    //         localStorage.setItem(`bkavail:${bi[i]}`,[1])
-    //         if(authornames.indexOf(author)==bi[i]){
-    //             localStorage.setItem(`authavail:${i}`,[1])
-    //             break
-    //         }
-    //         else{
-    //             localStorage.setItem(`authavail:${i}`,[0])
-    //         }
-    //     }else{
-    //         localStorage.setItem(`bkavail:${i}`,[0])
-    //     }
-    // }
+
     //-------------------------------------------------
     for(let i=0;i<bkscheck.length;i++){
         if(bkscheck[i][1]==bookname){
@@ -924,29 +857,7 @@ function submitBook(){
         }
     }
     //-------------------------------------------------
-    // for(let i=0;i<bkscheck.length;i++){
-    //     if(authornames.indexOf(author)==bkscheck[i][0] && localStorage.getItem(`bkavail:${bi[i]}`)==[1]){
-    //         localStorage.setItem(`authavail:${i}`,[1])
-    //         ai=authornames.indexOf(author)
-    //         authcheck.push([i,authornames[i]])
-    //         console.log(authcheck)
-    //         break
-    //     }else{
-    //         localStorage.setItem(`authavail:${i}`,[0])
-    //     }
-    // }
-    
-    // for(let i=0;i<authornames.length;i++){
-    //         if(localStorage.getItem(`bkavail:${i}`)==[1]){
-    //             localStorage.setItem(`authavail:${i}`,[1])
-    //             if(authornames[i]==author && i==bi){
-    //                 ai=i
-    //             break
-    //             }
-    //         }else{
-    //             localStorage.setItem(`authavail:${i}`,[0])
-    //         }
-    // }
+ 
     //----------------------------------------------------
     for(let i=0;i<bkscheck.length;i++){
         if(bkscheck[i][3]>=1){
@@ -961,46 +872,7 @@ function submitBook(){
         }
     }
     //----------------------------------------------------
-    // for(let i=0;i<bi.length;i++){
-    //             if(quantities[bi[i]]>=1 && ai==i){
-    //                 localStorage.setItem(`quavail:${ai}`,[1])
-    //                 break
-    //             }else{
-    //                 localStorage.setItem(`quavail:${ai}`,[0])
-    //             }
-    //         }
-    
-    
-    //----------------------------------------------------
-    // for(let i=0;i<booknames.length;i++){
-    // if(localStorage.getItem(`bkavail:${i}`)==[1]){
-    //     bookavail=[i,"success"]
-    //     console.log("book available ",bookavail)
-    // }else if(localStorage.getItem(`bkavail:${i}`)==[0]){
-    //     bookavail=[i,"failure"]
-    //     console.log("book unavailable ",bookavail)
-    // }
-    // }
-    // for(let i=0;i<authornames.length;i++){
-    //     if(localStorage.getItem(`authavail:${i}`)==[1]){
-            // authoravail=[i,"success"]
-            // console.log("author available ",authoravail)
-    //         break
-    //     }else if(localStorage.getItem(`authavail:${i}`)==[0]){
-    //         authoravail=[i,"failure"]
-    //         console.log("author unavailable ",authoravail)
-    //     }
-    // }
-    // for(let i=0;i<quantities.length;i++){
-    //         if(localStorage.getItem(`quavail:${i}`)==[1]){
-    //             quantityavail=[i,"success"]
-    //             console.log("quantity available ",quantityavail)
-    //             break
-    // }else if(localStorage.getItem(`quavail:${i}`)==[0]){
-    //     quantityavail=[i,"failure"]
-    //     console.log("quantity unavailable ",quantityavail)
-    // }
-    // }
+
     // ---------------------------------------------------
     
     let newptag1=document.createElement("p")
@@ -1071,18 +943,7 @@ function submitBook(){
     }
     addquantity()
     reducequantity()
-    //     let decrement
-    //     bks=JSON.parse(localStorage.getItem("books"))
-    //     decrement=quantities
-    //     for(let i=0;i<decrement.length;i++){               
-    //     if(bookstate=="issued"){
-    //         if(bks[i].name==bookname && bks[i].author==author){
-    //           decrement[i]--
-    //           bks[i].quantity=decrement[i]
-    //           localStorage.setItem("books",JSON.stringify(bks))
-    //         }
-    //     }
-    // }
+ 
         bkdetails=localStorage.getItem(loopCount)
         console.log(bkdetails)
     
@@ -1123,7 +984,8 @@ if(submitted==false){
 }
 }
 //-------------------------------------------------------------------------------------------------------// 
-if(stid[a]!=studentid && stname[a]!=studentname){   /** asdfgf ;lkjhj asdfgf  */
+if(stid[a]!=studentid && stname[a]!=studentname){   /**/
+console.log(studentid, studentname, stid[a], stname[a])
 if(submitted==false){
     msg.classList.add("warningbk")
     msg.innerText="You already submitted!"
@@ -1145,17 +1007,6 @@ if(submitted==false){
 }
 }
 
-  //calling  navbar function
-// if(sessionStorage.length<=1 && sessionStorage.key(0)=="IsThisFirstTime_Log_From_LiveServer" && sessionStorage.validate!="success"){
-//      location.href="./login.html"
-// }
-
-// fetch("./data.json")
-// .then((response)=>response.json())
-// .then((json)=>{ 
-//     //json.b.quantity=3
-//     console.log(json)
-// })
 
 //-------------------------------------------------return books---------------------------------------------//
 
@@ -1293,17 +1144,17 @@ if(location.pathname=="/return.html" || location.pathname=="/return.html#"){
         warning.innerText=`YOU DID'NT BORROW THIS BOOK FROM US`
      }
    }
-// asdfgf ;lkjhj asdfgf ;lkjhj 
+
 //ends
-/** asdfgf ;lkjhj  */
+
 }
 //inventory
 if(location.pathname=="/inventory.html" || location.pathname=="/inventory.html#"){
 let table=document.getElementById("tab")
 for(let i=0;i<JSON.parse(localStorage.getItem("books")).length;i++){
     let rows=document.createElement("tr")
-    rows.innerHTML=`<td>${JSON.parse(localStorage.getItem("books"))[i].name}</td><td>${JSON.parse(localStorage.getItem("books"))[i].quantity}</td><td>${JSON.parse(localStorage.getItem("books"))[i].author}</td>`
+    rows.innerHTML=`<td>${JSON.parse(localStorage.getItem("books"))[i].name}</td><td>${JSON.parse(localStorage.getItem("books"))[i].author}</td><td>${JSON.parse(localStorage.getItem("books"))[i].quantity}</td>`
     table.append(rows)
 }
-// asdfgf ;lkjhj asdfgf ;lkjhj /**  */ //
+
 }

@@ -599,7 +599,7 @@ function borrowbooks() {
 
   var current = []; //
 
-  current[0] = localStorage.getItem("records"); //      
+  current[0] = localStorage.getItem("records"); //
 
   localStorage.setItem("current", current[0]); //         
 
@@ -681,50 +681,7 @@ function borrowbooks() {
       }
     }
 
-    addquantity(); //else{
-    //         if(localStorage.getItem(`quantityreduce${i},${j}`)=="success"){
-    // quantities[j]+=1
-    // backup[j].quantity=quantities[j]
-    // localStorage.setItem(`quantityreduce${i},${j}`,"failure")
-    // localStorage.setItem("books",JSON.stringify(backup))
-    //     }
-    //   }
-    //--------------------------------------------------------------------------------------
-    // for(let i=0;i<booknames.length;i++){
-    //     for(let j=0;j<records.length;j++){
-    //       if(records[j].bookName!=booknames[i] && records[j].bookAuthor!=authornames[i]){
-    //         if(localStorage.getItem(`quantityreduce${j},${i}`)=="success"){
-    //             quantities[i]+=1
-    //             backup[i].quantity=quantities[i]
-    //             localStorage.setItem(`quantityreduce${j},${i}`,"failure")
-    //             localStorage.setItem("books",JSON.stringify(backup))
-    //         }
-    //       }
-    //     }
-    // }
-    //----------------------------------------------------------------------------------------
-    //-----------------------------------------------------------------
-    // for(let i=0;i<records.length;i++){
-    //     for(let j=0;j<booknames.length;j++){
-    //    if(records[i].bookName!=booknames[j] && records[i].bookAuthor!=authornames[j]){
-    //    if(localStorage.getItem(`quantityreduce${i},${j}`)!="success"){
-    //     quantities[j]=books[j].quantity
-    //     backup[j].quantity=quantities[j]
-    //     localStorage.setItem(`quantityreduce${i},${j}`,"failure")
-    //     localStorage.setItem("books",JSON.stringify(backup))
-    //     }
-    //    }else{
-    //     if(localStorage.getItem(`quantityreduce${j}`)!="success" || localStorage.getItem(`differentrecord${i}`)!="success"){
-    //     //    quantities[j]-=1
-    //     // backup[j].quantity=quantities[j]
-    //     // localStorage.setItem(`differentrecord${i}`,"success")
-    //     // localStorage.setItem(`quantityreduce${j}`,"success")
-    //     // localStorage.setItem("books",JSON.stringify(backup))
-    //     }
-    //    }
-    //   }
-    //  }
-    //------------------------------------------------------------------
+    addquantity(); //------------------------------------------------------------------
 
     if (records1.length < 1) {
       localStorage.setItem("books", JSON.stringify(backup));
@@ -868,18 +825,7 @@ function borrowbooks() {
       }
     } else {
       fields = false;
-    } // if(submission==false){
-    //         msg.classList.add("warningbk")
-    //         msg.classList.remove("vis")
-    //         msg.classList.remove("inv")
-    //         msg.innerText="PLEASE FILL ALL THE ABOVE FIELD"
-    //         setTimeout(()=>{
-    //         msg.classList.add("inv")
-    //         msg.classList.remove("vis")
-    //         newptag.remove()                      /**  */
-    //         },8000)
-    //     }
-
+    }
 
     if (fields == false) {
       msg.classList.add("warningbk");
@@ -942,7 +888,6 @@ function borrowbooks() {
       var bks;
       var bkscheck = [];
       var authcheck = [];
-      var submitted;
       var strecord = new Map();
       console.log(booknames);
       console.log(bookname); //----------------------------------
@@ -953,21 +898,7 @@ function borrowbooks() {
           bkscheck.push([_i11, booknames[_i11], authornames[_i11], quantities[_i11]]);
           console.log(bkscheck);
         }
-      } // for(let i=0;i<bi.length;i++){
-      //     if(booknames.indexOf(booknames[i],i)==bi[i]){
-      //         localStorage.setItem(`bkavail:${bi[i]}`,[1])
-      //         if(authornames.indexOf(author)==bi[i]){
-      //             localStorage.setItem(`authavail:${i}`,[1])
-      //             break
-      //         }
-      //         else{
-      //             localStorage.setItem(`authavail:${i}`,[0])
-      //         }
-      //     }else{
-      //         localStorage.setItem(`bkavail:${i}`,[0])
-      //     }
-      // }
-      //-------------------------------------------------
+      } //-------------------------------------------------
 
 
       for (var _i12 = 0; _i12 < bkscheck.length; _i12++) {
@@ -999,28 +930,6 @@ function borrowbooks() {
           console.log("author unavailable ", authoravail);
         }
       } //-------------------------------------------------
-      // for(let i=0;i<bkscheck.length;i++){
-      //     if(authornames.indexOf(author)==bkscheck[i][0] && localStorage.getItem(`bkavail:${bi[i]}`)==[1]){
-      //         localStorage.setItem(`authavail:${i}`,[1])
-      //         ai=authornames.indexOf(author)
-      //         authcheck.push([i,authornames[i]])
-      //         console.log(authcheck)
-      //         break
-      //     }else{
-      //         localStorage.setItem(`authavail:${i}`,[0])
-      //     }
-      // }
-      // for(let i=0;i<authornames.length;i++){
-      //         if(localStorage.getItem(`bkavail:${i}`)==[1]){
-      //             localStorage.setItem(`authavail:${i}`,[1])
-      //             if(authornames[i]==author && i==bi){
-      //                 ai=i
-      //             break
-      //             }
-      //         }else{
-      //             localStorage.setItem(`authavail:${i}`,[0])
-      //         }
-      // }
       //----------------------------------------------------
 
 
@@ -1036,44 +945,6 @@ function borrowbooks() {
           console.log("quantity unavailable ", quantityavail);
         }
       } //----------------------------------------------------
-      // for(let i=0;i<bi.length;i++){
-      //             if(quantities[bi[i]]>=1 && ai==i){
-      //                 localStorage.setItem(`quavail:${ai}`,[1])
-      //                 break
-      //             }else{
-      //                 localStorage.setItem(`quavail:${ai}`,[0])
-      //             }
-      //         }
-      //----------------------------------------------------
-      // for(let i=0;i<booknames.length;i++){
-      // if(localStorage.getItem(`bkavail:${i}`)==[1]){
-      //     bookavail=[i,"success"]
-      //     console.log("book available ",bookavail)
-      // }else if(localStorage.getItem(`bkavail:${i}`)==[0]){
-      //     bookavail=[i,"failure"]
-      //     console.log("book unavailable ",bookavail)
-      // }
-      // }
-      // for(let i=0;i<authornames.length;i++){
-      //     if(localStorage.getItem(`authavail:${i}`)==[1]){
-      // authoravail=[i,"success"]
-      // console.log("author available ",authoravail)
-      //         break
-      //     }else if(localStorage.getItem(`authavail:${i}`)==[0]){
-      //         authoravail=[i,"failure"]
-      //         console.log("author unavailable ",authoravail)
-      //     }
-      // }
-      // for(let i=0;i<quantities.length;i++){
-      //         if(localStorage.getItem(`quavail:${i}`)==[1]){
-      //             quantityavail=[i,"success"]
-      //             console.log("quantity available ",quantityavail)
-      //             break
-      // }else if(localStorage.getItem(`quavail:${i}`)==[0]){
-      //     quantityavail=[i,"failure"]
-      //     console.log("quantity unavailable ",quantityavail)
-      // }
-      // }
       // ---------------------------------------------------
 
 
@@ -1145,19 +1016,7 @@ function borrowbooks() {
       }
 
       addquantity();
-      reducequantity(); //     let decrement
-      //     bks=JSON.parse(localStorage.getItem("books"))
-      //     decrement=quantities
-      //     for(let i=0;i<decrement.length;i++){               
-      //     if(bookstate=="issued"){
-      //         if(bks[i].name==bookname && bks[i].author==author){
-      //           decrement[i]--
-      //           bks[i].quantity=decrement[i]
-      //           localStorage.setItem("books",JSON.stringify(bks))
-      //         }
-      //     }
-      // }
-
+      reducequantity();
       bkdetails = localStorage.getItem(loopCount);
       console.log(bkdetails);
 
@@ -1204,7 +1063,9 @@ function borrowbooks() {
 
 
     if (stid[a] != studentid && stname[a] != studentname) {
-      /** asdfgf ;lkjhj asdfgf  */
+      /**/
+      console.log(studentid, studentname, stid[a], stname[a]);
+
       if (submitted == false) {
         msg.classList.add("warningbk");
         msg.innerText = "You already submitted!"; // bkdetails.push({"bookName":bookname,"bookAuthor":author,"studentId":studentid,"studentName":studentname})
@@ -1223,17 +1084,7 @@ function borrowbooks() {
       }
     }
   }
-} //calling  navbar function
-// if(sessionStorage.length<=1 && sessionStorage.key(0)=="IsThisFirstTime_Log_From_LiveServer" && sessionStorage.validate!="success"){
-//      location.href="./login.html"
-// }
-// fetch("./data.json")
-// .then((response)=>response.json())
-// .then((json)=>{ 
-//     //json.b.quantity=3
-//     console.log(json)
-// })
-//-------------------------------------------------return books---------------------------------------------//
+} //-------------------------------------------------return books---------------------------------------------//
 
 
 if (location.pathname == "/return.html" || location.pathname == "/return.html#") {
@@ -1351,10 +1202,7 @@ if (location.pathname == "/return.html" || location.pathname == "/return.html#")
     } else {
       warning.innerText = "YOU DID'NT BORROW THIS BOOK FROM US";
     }
-  }; // asdfgf ;lkjhj asdfgf ;lkjhj 
-  //ends
-
-  /** asdfgf ;lkjhj  */
+  }; //ends
 
 
   nav();
@@ -1400,8 +1248,7 @@ if (location.pathname == "/inventory.html" || location.pathname == "/inventory.h
 
   for (var i = 0; i < JSON.parse(localStorage.getItem("books")).length; i++) {
     var rows = document.createElement("tr");
-    rows.innerHTML = "<td>".concat(JSON.parse(localStorage.getItem("books"))[i].name, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[i].quantity, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[i].author, "</td>");
+    rows.innerHTML = "<td>".concat(JSON.parse(localStorage.getItem("books"))[i].name, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[i].author, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[i].quantity, "</td>");
     table.append(rows);
-  } // asdfgf ;lkjhj asdfgf ;lkjhj /**  */ //
-
+  }
 }

@@ -657,11 +657,17 @@ font-size: 20px;
 }
 #tab{
     width: 75vw;
+    height: 70vh;
+    margin-left: 12vw;
+    margin-top: 13vh;
     text-align: center;
 }
 #tab tr{
   border: 1px solid black;
 }
 #tab th{
+    border: 1px solid black;
+}
+#tab td{
     border: 1px solid black;
 }
