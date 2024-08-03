@@ -5,7 +5,7 @@ function nav() {
   var flag;
 
   if (sessionStorage.validate != "success") {
-    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html";
+    location.href = "http://127.0.0.1:5500/login.html";
   }
 
   var mainlog = document.getElementById("mlog");
@@ -24,28 +24,28 @@ function nav() {
   mlogout.addEventListener("click", function () {
     localStorage.status = "failure";
     sessionStorage.validate = "failure";
-    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html";
+    location.href = "http://127.0.0.1:5500/login.html";
   });
   var borrowbooks = document.getElementById("borrowbooks");
   borrowbooks.addEventListener("click", function () {
     console.log("event occurs");
-    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/borrowbooks.html";
+    location.href = "http://127.0.0.1:5500/borrowbooks.html";
   });
   var returnbooks = document.getElementById("returnbooks");
   returnbooks.addEventListener("click", function () {
-    location.href = "./return.html";
+    location.href = "http://127.0.0.1:5500/return.html";
   });
   var history = document.getElementById("history");
   history.addEventListener("click", function () {
-    location.href = "./history.html";
+    location.href = "http://127.0.0.1:5500/history.html";
   });
   var invent = document.getElementById("invent");
   invent.addEventListener("click", function () {
-    location.href = "./inventory.html";
+    location.href = "http://127.0.0.1:5500/inventory.html";
   });
 }
 
-if (location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html" || location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html#") {
+if (location.href == "http://127.0.0.1:5500/login.html" || location.href == "http://127.0.0.1:5500/login.html#") {
   login();
 }
 
@@ -69,7 +69,7 @@ function login() {
     localStorage.status = "failure";
   }
 
-  if (location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html" || location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html#") {
+  if (location.href == "http://127.0.0.1:5500/login.html" || location.href == "http://127.0.0.1:5500/login.html#") {
     try {
       var getUser = function getUser(e) {
         user = e.value;
@@ -100,7 +100,7 @@ function login() {
 
       if (localStorage.status == "success" && sessionStorage.validate == "success") {
         localStorage.setItem("flag", true);
-        location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/main.html";
+        location.href = "http://127.0.0.1:5500/main.html";
       } else {
         sessionStorage.setItem("validate", "failure");
       }
@@ -163,7 +163,7 @@ function login() {
 
           warning.classList.add("warninglog");
           warning.innerHTML = "<p>Invalid password</p>"; // setTimeout(()=>{
-          //     location.href="https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html"
+          //     location.href="http://127.0.0.1:5500/login.html"
           //  },3000)
         }
       }
@@ -174,7 +174,7 @@ function login() {
         warning.innerHTML = "<p>Please enter your username</p>";
       } else {
         warning.classList.remove("successlog");
-        warning.classList.add("");
+        warning.classList.add("#");
         warning.innerHTML = "<p>This username doesn't exist</p>";
       }
     }
@@ -190,14 +190,14 @@ if (location.pathname == "/main.html") {
   nav();
 
   if (localStorage.status != "success" && sessionStorage.validate != "success") {
-    location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html";
+    location.href = "http://127.0.0.1:5500/login.html";
   }
 } // if(flag==false){
-//     location.href="https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html"
+//     location.href="http://127.0.0.1:5500/login.html"
 //     break
 // }
 // else{
-//     location.href="https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/main.html"
+//     location.href="http://127.0.0.1:5500/main.html"
 // }
 //-----------------------------------------------------------//
 //-------------------------signup----------------------------//
@@ -205,7 +205,7 @@ if (location.pathname == "/main.html") {
 // let map1=new Map()
 
 
-if (location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/signup.html" || location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/signup.html#") {
+if (location.href == "http://127.0.0.1:5500/signup.html" || location.href == "http://127.0.0.1:5500/signup.html#") {
   signup();
 }
 
@@ -382,7 +382,7 @@ function signup() {
 
   if (sessionStorage.validate == "success" && localStorage.getItem(user1a) == pass1a) {
     setTimeout(function () {
-      location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/main.html";
+      location.href = "http://127.0.0.1:5500/main.html";
     }, 7000);
   }
 }
@@ -393,7 +393,7 @@ localStorage.setItem("FNAME", localStorage.getItem("FNAME").split(",")); //-----
 
 console.log(location.href);
 
-if (location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/borrowbooks.html" || location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/borrowbooks.html#") {
+if (location.href == "http://127.0.0.1:5500/borrowbooks.html" || location.href == "http://127.0.0.1:5500/borrowbooks.html#") {
   nav();
   borrowbooks();
 }
@@ -1159,7 +1159,7 @@ function borrowbooks() {
       }
 
       if (localStorage.status != "success" && sessionStorage.validate != "success") {
-        location.href = "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html";
+        location.href = "http://127.0.0.1:5500/login.html";
       }
 
       addEventListener("keypress", function () {
@@ -1218,7 +1218,7 @@ function borrowbooks() {
   }
 } //calling  navbar function
 // if(sessionStorage.length<=1 && sessionStorage.key(0)=="IsThisFirstTime_Log_From_LiveServer" && sessionStorage.validate!="success"){
-//      location.href="https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/login.html"
+//      location.href="http://127.0.0.1:5500/login.html"
 // }
 // fetch("./data.json")
 // .then((response)=>response.json())
@@ -1229,7 +1229,7 @@ function borrowbooks() {
 //-------------------------------------------------return books---------------------------------------------//
 
 
-if (location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/return.html" || location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/return.html#") {
+if (location.href == "http://127.0.0.1:5500/return.html" || location.href == "http://127.0.0.1:5500/return.html#") {
   var studentid = function studentid(e) {
     stid = JSON.stringify(e.value);
   };
@@ -1353,7 +1353,7 @@ if (location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/
   nav();
 
   if (sessionStorage.getItem("validate") != "success") {
-    location.href = "./login.html";
+    location.href = "http://127.0.0.1:5500/login.html";
   }
 
   bookdbcreation();
@@ -1388,12 +1388,13 @@ if (location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/
 } //inventory
 
 
-if (location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/inventory.html" || location.href == "https://gowthaman9710.github.io/LIBRARY-MANAGEMENT-SYSTEM/inventory.html#") {
+if (location.href == "http://127.0.0.1:5500/inventory.html" || location.href == "http://127.0.0.1:5500/inventory.html#") {
   var table = document.getElementById("tab");
+  nav();
 
   for (var i = 0; i < JSON.parse(localStorage.getItem("books")).length; i++) {
     var rows = document.createElement("tr");
-    rows.innerHTML = "<td>".concat(JSON.parse(localStorage.getItem("books"))[i].name, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[i].quantity, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[i].author, "</td>");
+    rows.innerHTML = "<td>".concat(JSON.parse(localStorage.getItem("books"))[i].name, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[i].author, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[i].quantity, "</td>");
     table.append(rows);
   } // asdfgf ;lkjhj asdfgf ;lkjhj /**  */ //
 
