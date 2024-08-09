@@ -346,7 +346,6 @@ function storeinfo(){
         }
        // localStorage.setItem("USERNAME",[...user1a])
        // localStorage.setItem("PASSWORD",[...pass1a])
-        location.reload()
     }
 }
 if(sessionStorage.validate=="success" && localStorage.getItem(user1a)==pass1a){
@@ -360,10 +359,146 @@ localStorage.setItem("FNAME",localStorage.getItem("FNAME").split(","))
 //--------------------------------------
 //borrow books
 console.log(location.href)
+let records1=[]
+let booknames=[]
+let quantities=[]
+let authornames=[]
+bookdbcreation()
+console.log(localStorage.getItem("books"))
+for(let i=0;i<JSON.parse(localStorage.getItem("books")).length;i++){
+   booknames.push(JSON.parse(localStorage.getItem("books"))[i].name.toLowerCase())
+   quantities.push(JSON.parse(localStorage.getItem("books"))[i].quantity)
+   authornames.push(JSON.parse(localStorage.getItem("books"))[i].author.toLowerCase())
+}
+// for(let o of sortednums){
+//      records1.push(JSON.parse(localStorage.getItem(o)))
+// }
+if(JSON.parse(localStorage.getItem("STRECORDS"))!=null){
+for(let i=0;i<JSON.parse(localStorage.getItem("STRECORDS")).length;i++){
+    records1.push(JSON.parse(localStorage.getItem("STRECORDS"))[i])
+}
+}
+function addquantity(){
+    let backup=JSON.parse(localStorage.getItem("books"))
+    for(let i=0;i<records1.length*20;i++){
+        for(let j=0;j<booknames.length;j++){
+            if(records1.length>0){
+        if(localStorage.getItem(`quantityreduce${i},${j}`)=="success"){
+            if(localStorage.getItem(`quantityadd${i},${j}`)!="success"){
+            if((records1[i]!=null || records1[i]!=undefined) && (records1[i]!=null || records1[i]!=undefined)){
+       if(records1[i].bookName!=booknames[j] && records1[i].bookAuthor!=authornames[j]){                            
+        quantities[j]+=1
+        backup[j].quantity=quantities[j]
+        localStorage.setItem(`quantityadd${i},${j}`,"success")
+        localStorage.setItem(`quantityreduce${i},${j}`,"failure")
+        //quantityreduce.push(localStorage.getItem("quantityreduce"))
+        //quantityreduce.push([i,j])
+        localStorage.setItem(`quantityreduce`,quantityreduce)
+        localStorage.setItem("books",JSON.stringify(backup))        
+         }
+        }else{
+            quantities[j]+=1
+            backup[j].quantity=quantities[j]
+            localStorage.setItem(`quantityadd${i},${j}`,"success")
+            localStorage.setItem(`quantityreduce${i},${j}`,"failure")
+            //quantityreduce.push(localStorage.getItem("quantityreduce"))
+            //quantityreduce.push([i,j])
+            localStorage.setItem(`quantityreduce`,quantityreduce)
+            localStorage.setItem("books",JSON.stringify(backup))     
+        }
+    }
+    }
+    }
+    }
+    }
+    }  
+    let quantityreduce
+if(localStorage.getItem("quantityreduce")==null){
+    quantityreduce=[]
+    localStorage.setItem(`quantityreduce`,quantityreduce)
+}    
+    function reducequantity(){
+        let backupreduce=JSON.parse(localStorage.getItem("books"))
+        console.log(backupreduce)
+        for(let i=0;i<records1.length;i++){
+            for(let j=0;j<booknames.length;j++){
+           if(records1[i].bookName==booknames[j] && records1[i].bookAuthor==authornames[j]){                            
+            if(localStorage.getItem(`quantityreduce${i},${j}`)!="success"){
+            quantities[j]-=1
+            backupreduce[j].quantity=quantities[j]    
+            localStorage.setItem(`quantityreduce${i},${j}`,"success")
+            //quantityreduce.push(localStorage.getItem("quantityreduce"))
+            //quantityreduce.push([i,j])
+            localStorage.setItem(`quantityreduce`,quantityreduce)
+            localStorage.setItem("books",JSON.stringify(backupreduce))
+             }
+            }
+        }
+        }
+        console.log(booknames,quantities,authornames)   
+        console.log("records",records1)
+       // addquantity()
+        if(records1.length<1){
+            localStorage.setItem("books",JSON.stringify(backupreduce))
+        }
+        } 
+function bookdbcreation(){
+    let books=[
+                 {        
+                'name':'java',
+                 'quantity':12,
+                 'author':'balagurusamy'
+                },
+                {
+                'name':'java',
+                'quantity':10,
+                'author':'ramesh'
+                },
+                {
+                 'name':'python',
+                 'quantity':7,
+                 'author':'prince'
+                  },
+                  {
+                  'name':'frontend frameworks',
+                  'quantity':15,
+                  'author':'badri'
+                   }, 
+               {
+                'name':'mysql',
+                'quantity':12,
+                'author':'aaron'
+                 },
+                {
+                'name':'dotnet',
+                'quantity':0,
+                 'author':'balaji'
+                }
+    ]
+    for(let i=0;i<localStorage.length;i++){
+    if(localStorage.key(i)=="books"){
+        bookdb="found"
+        localStorage.setItem("bookdb","found")
+        break
+    }
+    else{
+        bookdb="notfound"
+        localStorage.setItem("bookdb","notfound")
+    }
+    }
+    if(bookdb=="notfound"){
+            localStorage.setItem("books",JSON.stringify(books))  
+        localStorage.setItem("bookdb","found")
+    }
+    }
 if(location.href=="http://127.0.0.1:5500/borrowbooks.html" || location.href=="http://127.0.0.1:5500/borrowbooks.html#"){
     nav()
+    //bookdbcreation()
+    //reducequantity()
     borrowbooks()
-}  
+}
+
+
 function borrowbooks(){
 let main=document.getElementById("homeabook")
 let bkname=document.getElementById("bkname")
@@ -379,68 +514,12 @@ let msg=document.getElementById("msg")
 let subdate
 let bksubmit=document.getElementById("bksubmit")
 let bookdb
-let booknames=[]
-let quantities=[]
-let authornames=[]
 let numstate
 let numkeys=[]
 let loopCount
-function bookdbcreation(){
-let books=[
-             {        
-            'name':'java',
-             'quantity':12,
-             'author':'balagurusamy'
-            },
-            {
-            'name':'java',
-            'quantity':10,
-            'author':'ramesh'
-            },
-            {
-             'name':'python',
-             'quantity':7,
-             'author':'prince'
-              },
-              {
-              'name':'frontend frameworks',
-              'quantity':15,
-              'author':'badri'
-               }, 
-           {
-            'name':'mysql',
-            'quantity':12,
-            'author':'aaron'
-             },
-            {
-            'name':'dotnet',
-            'quantity':0,
-             'author':'balaji'
-            }
-]
-for(let i=0;i<localStorage.length;i++){
-if(localStorage.key(i)=="books"){
-    bookdb="found"
-    localStorage.setItem("bookdb","found")
-    break
-}
-else{
-    bookdb="notfound"
-    localStorage.setItem("bookdb","notfound")
-}
-}
-if(bookdb=="notfound"){
-        localStorage.setItem("books",JSON.stringify(books))  
-    localStorage.setItem("bookdb","found")
-}
-}
-bookdbcreation()
-for(let i=0;i<JSON.parse(localStorage.getItem("books")).length;i++){
-   booknames.push(JSON.parse(localStorage.getItem("books"))[i].name.toLowerCase())
-   quantities.push(JSON.parse(localStorage.getItem("books"))[i].quantity)
-   authornames.push(JSON.parse(localStorage.getItem("books"))[i].author.toLowerCase())
-}
 
+
+bookdbcreation()
 for(let i=0;i<localStorage.length;i++){
 if(isNaN(localStorage.key(i))==false){
     numstate="found"
@@ -524,7 +603,7 @@ console.log(sortednums)
 // }
 //localStorage.setItem("records",loopCount)
 console.log(loopCount)
-console.log(booknames,quantities,authornames)
+
 if(localStorage.getItem("records")==null || localStorage.getItem("records")==undefined){
     localStorage.setItem("records",1)
 }
@@ -537,18 +616,12 @@ for(let i=0;i<localStorage.length;i++){
         recordkeys.push(parseInt(localStorage.key(i)))
     }
 }
-let records1=[]
-// for(let o of sortednums){
-//      records1.push(JSON.parse(localStorage.getItem(o)))
-// }
-for(let i=0;i<JSON.parse(localStorage.getItem("STRECORDS")).length;i++){
-    records1.push(JSON.parse(localStorage.getItem("STRECORDS"))[i])
-}
+
 
 console.log(recordkeys)
 console.log(sortednums)
 console.log(localStorage.getItem(1))
-console.log(records1)
+
 let val
 ///////////////////////////////////////////////////////////
 let current=[]                                            //
@@ -559,69 +632,11 @@ if(current[0]<localStorage.getItem("current")){             //
    localStorage.setItem("highest",1)                        //
 }                                                         //
 //////////////////////////////////////////////////////////
-let quantityreduce
-if(localStorage.getItem("quantityreduce")==null){
-    quantityreduce=[]
-    localStorage.setItem(`quantityreduce`,quantityreduce)
-}    
+
 if(localStorage.getItem("totalrecords")!=null){
 console.log(/*localStorage.getItem("records"),*/JSON.parse(localStorage.getItem("totalrecords")).length)
 }
-function reducequantity(){
-let backup=JSON.parse(localStorage.getItem("books"))
-console.log(backup)
-for(let i=0;i<records1.length;i++){
-    for(let j=0;j<booknames.length;j++){
-   if(records1[i].bookName==booknames[j] && records1[i].bookAuthor==authornames[j]){                            
-    if(localStorage.getItem(`quantityreduce${i},${j}`)!="success"){
-    quantities[j]-=1
-    backup[j].quantity=quantities[j]    
-    localStorage.setItem(`quantityreduce${i},${j}`,"success")
-    //quantityreduce.push(localStorage.getItem("quantityreduce"))
-    //quantityreduce.push([i,j])
-    localStorage.setItem(`quantityreduce`,quantityreduce)
-    localStorage.setItem("books",JSON.stringify(backup))
-     }
-    }
-}
-}
-
-console.log("records",records1)
-function addquantity(){
-for(let i=0;i<records1.length*20;i++){
-    for(let j=0;j<booknames.length;j++){
-        if(records1.length>0){
-    if(localStorage.getItem(`quantityreduce${i},${j}`)=="success"){
-        if(localStorage.getItem(`quantityadd${i},${j}`)!="success"){
-        if((records1[i]!=null || records1[i]!=undefined) && (records1[i]!=null || records1[i]!=undefined)){
-   if(records1[i].bookName!=booknames[j] && records1[i].bookAuthor!=authornames[j]){                            
-    quantities[j]+=1
-    backup[j].quantity=quantities[j]
-    localStorage.setItem(`quantityadd${i},${j}`,"success")
-    localStorage.setItem(`quantityreduce${i},${j}`,"failure")
-    //quantityreduce.push(localStorage.getItem("quantityreduce"))
-    //quantityreduce.push([i,j])
-    localStorage.setItem(`quantityreduce`,quantityreduce)
-    localStorage.setItem("books",JSON.stringify(backup))        
-     }
-    }else{
-        quantities[j]+=1
-        backup[j].quantity=quantities[j]
-        localStorage.setItem(`quantityadd${i},${j}`,"success")
-        localStorage.setItem(`quantityreduce${i},${j}`,"failure")
-        //quantityreduce.push(localStorage.getItem("quantityreduce"))
-        //quantityreduce.push([i,j])
-        localStorage.setItem(`quantityreduce`,quantityreduce)
-        localStorage.setItem("books",JSON.stringify(backup))     
-    }
-}
-}
-}
-}
-}
-}
-addquantity()
-     
+    
      //else{
 //         if(localStorage.getItem(`quantityreduce${i},${j}`)=="success"){
             // quantities[j]+=1
@@ -645,7 +660,7 @@ addquantity()
 //     }
 // }
 //----------------------------------------------------------------------------------------
-//-----------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // for(let i=0;i<records.length;i++){
 //     for(let j=0;j<booknames.length;j++){
 //    if(records[i].bookName!=booknames[j] && records[i].bookAuthor!=authornames[j]){
@@ -666,12 +681,7 @@ addquantity()
 //    }
 //   }
 //  }
-//------------------------------------------------------------------
-if(records1.length<1){
-    localStorage.setItem("books",JSON.stringify(backup))
-}
-}
-reducequantity()
+//---------------------------------------------------------------------------------------
 console.log("records",records)
 console.log("quantities",quantities)
 localStorage.setItem("totalrecords",JSON.stringify(records1))
@@ -693,7 +703,7 @@ sid.addEventListener("keyup",()=>{
     setid(sid)
 })
 function setid(e){
-    studentid=JSON.stringify(e.value)
+    studentid=e.value
     console.log(studentid)
 }
 sname.addEventListener("keyup",()=>{
@@ -820,20 +830,7 @@ bksubmit.addEventListener("click",()=>{
         },8000)
     }
 })
-let stid=[]
-let bname=[]
-let bauthor=[]
-let stname=[]
-//console.log(JSON.parse(localStorage.getItem("STRECORDS"))[0].studentId)
-if(JSON.parse(localStorage.getItem("STRECORDS"))!=null){
-for(let i=0;i<JSON.parse(localStorage.getItem("STRECORDS")).length;i++){
-stid.push(JSON.parse(JSON.parse(localStorage.getItem("STRECORDS"))[i].studentId))
-bname.push(JSON.parse(localStorage.getItem("STRECORDS"))[i].bookName)
-stname.push(JSON.parse(localStorage.getItem("STRECORDS"))[i].studentName)
-bauthor.push(JSON.parse(localStorage.getItem("STRECORDS"))[i].bookAuthor)
-}
-}
-console.log(stid,"  ",bname,"  ",bauthor)
+
 let submitted=false
 function submitBook(){
     function submit(){
@@ -1000,9 +997,10 @@ function submitBook(){
     let newptag1=document.createElement("p")
     let newptag2=document.createElement("p")
     let newptag3=document.createElement("p")
+    let allrecords
     if(bookavail[1]=="success"){
         if(authoravail[1]=="success"){
-            if(quantityavail[1]=="success"){
+            if(quantityavail[1]=="success" && submitted!=true && isrecordinside!=true){
                 console.log("quantity check ok")
                 let strecord1={
                     "studentId":studentid,
@@ -1024,20 +1022,53 @@ function submitBook(){
                     studentrecords=[]
                 }
                 studentrecords.push(strecord1)
-                localStorage.setItem("STRECORDS",JSON.stringify(studentrecords))
+                localStorage.setItem("STRECORDS",JSON.stringify(studentrecords))// 
                 //localStorage.setItem(loopCount,JSON.stringify(strecord1))
                 bookstate="issued"
                 msg.classList.remove("warningbk")
+                if(localStorage.getItem("allrec")!=null){
+                    allrecords=JSON.parse(localStorage.getItem("allrec"))
+                    }else{
+                        allrecords=[]
+                    }
+                    allrecords.push(strecord1)
+                    localStorage.setItem("allrec",JSON.stringify(allrecords))
                 msg.innerHTML=`<p>THE REQUESTED BOOK WILL BE ISSUED, PLEASE RETURN THE ${bookname.toUpperCase()} BOOK ON ${JSON.parse(subdate)} AT MORNING 9:30 A.M AT LIBRARY INCHARGE</p>`
                 submitted=true
-                reducequantity()
+                function decrement(){
+                    let bkbackup2=JSON.parse(localStorage.getItem("books"))
+                    for(let i=0;i<JSON.parse(localStorage.getItem("books")).length;i++){
+                        if(JSON.parse(localStorage.getItem("books"))[i].name==bookname){
+                            if(JSON.parse(localStorage.getItem("books"))[i].author==author){
+                                bkbackup2[i].quantity-=1
+                                localStorage.setItem("books",JSON.stringify(bkbackup2))
+                            }
+                        }
+                    }
+                }
+                if(localStorage.getItem("books")!=null){
+                decrement()
+                }else{
+                    bookdbcreation()
+                    decrement()
+                }
+               // reducequantity()
+
             }else{
+                if(submitted!=true && quantityavail[1]!="success" && isrecordinside!=true){
                 alert("QUANTITY INSUFFICIENT")
                 msg.classList.add("warningbk")
                 msg.innerHTML=`<p>THE REQUESTED BOOK IS NOT AVAILABLE DUE TO THE INSUFFICIENT QUANTITY</p>`
                 setTimeout(()=>{
                     //location.reload()
                 },15000)
+            }else{
+                if(isrecordinside!=true){
+                msg.innerHTML=`<p>You already submitted</p>`
+                }else{
+                    msg.innerHTML=`<p>You already got this book</p>`
+                }
+            }
             }
         }else{
             msg.classList.add("warningbk")
@@ -1063,8 +1094,8 @@ function submitBook(){
         },15000)
         
     }
-    addquantity()
-    reducequantity()
+    //addquantity()
+   // reducequantity()
     //     let decrement
     //     bks=JSON.parse(localStorage.getItem("books"))
     //     decrement=quantities
@@ -1092,49 +1123,40 @@ function submitBook(){
     })
 }
 //-------------------------------------------------------------------------------------------------------// 
-let submittest=false
+let isrecordinside=false
 let a
+let stid=[]
+let bname=[]
+let bauthor=[]
+let stname=[]
+//console.log(JSON.parse(localStorage.getItem("STRECORDS"))[0].studentId)
+if(JSON.parse(localStorage.getItem("STRECORDS"))!=null){
+for(let i=0;i<JSON.parse(localStorage.getItem("STRECORDS")).length;i++){
+    
+stid.push(JSON.parse(localStorage.getItem("STRECORDS"))[i].studentId)
+bname.push(JSON.parse(localStorage.getItem("STRECORDS"))[i].bookName)
+stname.push(JSON.parse(localStorage.getItem("STRECORDS"))[i].studentName)
+bauthor.push(JSON.parse(localStorage.getItem("STRECORDS"))[i].bookAuthor)
+}
+}
+console.log(stid,"  ",bname,"  ",bauthor)
 for(let i=0;i<stid.length;i++){
-if(stid[i]!=studentid && stname[i]!=studentname){   /** asdfgf ;lkjhj asdfgf  */
-if(submitted==false){
-    submittest=false
+if(stid[i]==studentid && stname[i]==studentname && bname[i]==bookname && bauthor[i]==author){   /** asdfgf ;lkjhj asdfgf  */
+    a=i
+    isrecordinside=true
+    break
     // bkdetails.push({"bookName":bookname,"bookAuthor":author,"studentId":studentid,"studentName":studentname})
 }else{
-    a=i
-    submittest=true
-    break
-}
-}else{
-    for(let j=0;j<bname.length;j++){
-    if(bname[j]!=bookname && bauthor[j]!=author){
-        submittest=false
-    }else{
-        a=i
-      submittest=true
-      break
-    }
-}
+    isrecordinside=false
 }
 }
 //-------------------------------------------------------------------------------------------------------// 
-if(stid[a]!=studentid && stname[a]!=studentname){   /** asdfgf ;lkjhj asdfgf  */
-if(submitted==false){
-    msg.classList.add("warningbk")
-    msg.innerText="You already submitted!"
+if(isrecordinside==true){  
+    msg.classList.add("warningbk")            
+    msg.innerText="You already submitted a request for this book"
     // bkdetails.push({"bookName":bookname,"bookAuthor":author,"studentId":studentid,"studentName":studentname})
 }else{
     submit()
-    submitted=true
-}
-}else{
-    if(bname[a]==bookname && bauthor[a]==author){      
-        msg.classList.add("warningbk")
-        msg.classList.remove("inv")
-        msg.innerText="You already got this book"
-    }else{
-        submit()
-        submitted=true
-    }
 }
 }
 }
@@ -1154,13 +1176,14 @@ if(submitted==false){
 //-------------------------------------------------return books---------------------------------------------//
 
 if(location.href=="http://127.0.0.1:5500/return.html" || location.href=="http://127.0.0.1:5500/return.html#"){
+    bookdbcreation()
    nav()
    if(sessionStorage.getItem("validate")!="success"){
      location.href="http://127.0.0.1:5500/login.html"
    }
    bookdbcreation()
-   addquantity()
-   reducequantity()
+   //addquantity()
+  // reducequantity()
    let sid=document.getElementById("rsid")
    let sname=document.getElementById("rsname")
    let bkname=document.getElementById("rbkname")
@@ -1168,7 +1191,7 @@ if(location.href=="http://127.0.0.1:5500/return.html" || location.href=="http://
    let dateofsub=document.getElementById("rdateofsub")
    let bksubmit=document.getElementById("rbksubmit")
    let warning=document.getElementById("warnreturn")
-   let stid,stname,bksname,bksauthor,submitdate
+   let stid,stname,bksname,bksauthor,submitdate        // 
    sid.addEventListener("keyup",()=>{
     studentid(sid)
    })
@@ -1193,25 +1216,56 @@ if(location.href=="http://127.0.0.1:5500/return.html" || location.href=="http://
    function bookauthor(e){
     bksauthor=e.value
    }    
-   dateofsub.addEventListener("keyup",()=>{
+   dateofsub.addEventListener("change",()=>{
       subdate(dateofsub)
    })
    function subdate(e){
+    console.log(e, dateofsub)
     submitdate=e.value
+    console.log(submitdate)
    }
    bksubmit.addEventListener("click",()=>{
     booksubmit()
    })
+   let idxrtdel
+   let backup1
+   if(JSON.parse(localStorage.getItem("RTRECORDS"))!=null){
+   for(let i=0;i<JSON.parse(localStorage.getItem("RTRECORDS")).length;i++){
+       if(JSON.parse(localStorage.getItem("RTRECORDS")).includes(JSON.stringify(stid))!=true){
+           if(JSON.parse(localStorage.getItem("RTRECORDS"))[i].studentName==stname){
+               if(JSON.parse(localStorage.getItem("STRECORDS"))[i].bookName==bksname){
+                   if(JSON.parse(localStorage.getItem("STRECORDS"))[i].bookAuthor==bksauthor){
+                       idxrtdel=i
+                   }
+               }
+           }
+       }
+   }
+}
+if(JSON.parse(localStorage.getItem("RTRECORDS"))!=null && (idxrtdel!=null || idxrtdel!=undefined)){
+    backup1=JSON.parse(localStorage.getItem("RTRECORDS"))
+    backup1.splice(idxrtdel,1)
+    localStorage.setItem("RTRECORDS",JSON.stringify(backup1))
+    }
    function booksubmit(){
+    let fields
+    if(stid!=undefined && stid!=null && stname!=null && stname!=undefined && bksname!=null && bksname!=undefined && bksauthor!=null && bksauthor!=undefined && submitdate!=null && submitdate!=undefined){
+       // warning.innerText="Please fill all the above fields"
+       fields="filled"
+       }else{
+        fields="blank"
+       }
     let idcheck=false
     let stnamecheck=false
     let bknamecheck=false
     let authornamecheck=false
     let idx
-    let backup
+    let backup2
+
     for(let i=0;i<JSON.parse(localStorage.getItem("STRECORDS")).length;i++){
         console.log(JSON.parse(localStorage.getItem("STRECORDS"))[i].studentId,"==",stid)
         if(JSON.parse(localStorage.getItem("STRECORDS")).includes(JSON.stringify(stid))!=true){
+            console.log(JSON.parse(localStorage.getItem("STRECORDS")),"   ",JSON.stringify(stid))
             idcheck=true
          if(JSON.parse(localStorage.getItem("STRECORDS"))[i].studentName==stname){
             stnamecheck=true
@@ -1245,6 +1299,8 @@ if(location.href=="http://127.0.0.1:5500/return.html" || location.href=="http://
         idcheck=false
        }
      }
+     let allrecords
+     if(fields=="filled"){
      if(idcheck==true){
         if(stnamecheck==true){
             if(bknamecheck==true){
@@ -1270,9 +1326,25 @@ if(location.href=="http://127.0.0.1:5500/return.html" || location.href=="http://
                     }
                     studentrecords.push(strecord2)
                     localStorage.setItem("RTRECORDS",JSON.stringify(studentrecords))
-                    backup=JSON.parse(localStorage.getItem("RTRECORDS"))
-                    backup.splice(idx,1)
-                    localStorage.setItem("RTRECORDS",JSON.stringify(backup))
+                    backup2=JSON.parse(localStorage.getItem("STRECORDS"))
+                    backup2.splice(idx,1)
+                    localStorage.setItem("STRECORDS",JSON.stringify(backup2))
+                    let bkbackup1=JSON.parse(localStorage.getItem("books"))
+                    for(let i=0;i<JSON.parse(localStorage.getItem("books")).length;i++){
+                        if(JSON.parse(localStorage.getItem("books"))[i].name==bksname){
+                            if(JSON.parse(localStorage.getItem("books"))[i].author==bksauthor){
+                                bkbackup1[i].quantity+=1
+                                localStorage.setItem("books",JSON.stringify(bkbackup1))
+                            }
+                        }
+                    }
+                    if(localStorage.getItem("allrec")!=null){
+                        allrecords=JSON.parse(localStorage.getItem("allrec"))
+                        }else{
+                            allrecords=[]
+                        }
+                        allrecords.push(strecord2)
+                        localStorage.setItem("allrec",JSON.stringify(allrecords))
                     warning.innerText=`THE LAB INCHARGE WILL COLLECT THE ${bksname} BOOK FROM YOU.`
                 }else{
                     warning.innerText=`YOU BORROWED THE BOOK FROM DIFFERENT AUTHOR`
@@ -1286,6 +1358,9 @@ if(location.href=="http://127.0.0.1:5500/return.html" || location.href=="http://
      }else{
         warning.innerText=`YOU DID'NT BORROW THIS BOOK FROM US`
      }
+    }else{
+        warning.innerText=`PLEASE FILL ALL THE ABOVE FIELDS`
+    }
    }
 // asdfgf ;lkjhj asdfgf ;lkjhj 
 //ends
@@ -1301,4 +1376,9 @@ for(let i=0;i<JSON.parse(localStorage.getItem("books")).length;i++){
     table.append(rows)
 }
 // asdfgf ;lkjhj asdfgf ;lkjhj /**  */ //
+}
+
+if(location.href=="http://127.0.0.1:5500/history.html" || location.href=="http://127.0.0.1:5500/history.html#"){
+    nav()
+
 }
