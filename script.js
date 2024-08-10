@@ -38,6 +38,10 @@ let invent=document.getElementById("invent")
 invent.addEventListener("click",()=>{
     location.href="http://127.0.0.1:5500/inventory.html"
 })
+let explore=document.getElementById("mexplore")
+explore.addEventListener("click",()=>{
+    location.href="http://127.0.0.1:5500/explore.html"
+})
 }
 
 if(location.href=="http://127.0.0.1:5500/login.html" || location.href=="http://127.0.0.1:5500/login.html#"){
@@ -491,6 +495,8 @@ function bookdbcreation(){
         localStorage.setItem("bookdb","found")
     }
     }
+
+    //borrow books
 if(location.href=="http://127.0.0.1:5500/borrowbooks.html" || location.href=="http://127.0.0.1:5500/borrowbooks.html#"){
     nav()
     //bookdbcreation()
@@ -498,7 +504,7 @@ if(location.href=="http://127.0.0.1:5500/borrowbooks.html" || location.href=="ht
     borrowbooks()
 }
 
-
+let b_student_name
 function borrowbooks(){
 let main=document.getElementById("homeabook")
 let bkname=document.getElementById("bkname")
@@ -779,7 +785,7 @@ bksubmit.addEventListener("click",()=>{
                 if(studentname!=null || studentname!=undefined){
                     if((subdate!=null || subdate!=undefined)){
                         fields=true
-                        if(datevalid==true){
+                    if(datevalid==true){
                         msg.classList.remove("warningbk")
                         msg.classList.add("inv")
                         fields=true
@@ -788,7 +794,7 @@ bksubmit.addEventListener("click",()=>{
                     }else{
                         datevalid=false
                         fields=true
-                        msg.classList.add("warningbk")   //
+                        msg.classList.add("warningbk")   // 
                         msg.innerHTML="Please select the correct date"
                         }
                     }else{
@@ -1026,6 +1032,17 @@ function submitBook(){
                 //localStorage.setItem(loopCount,JSON.stringify(strecord1))
                 bookstate="issued"
                 msg.classList.remove("warningbk")
+                a=function(){
+                    let d=new Date()
+                    let strecord1={
+                        "date":`${d.getDate()}-${d.getMonth()+1}-${d.getFullYear()}`,
+                        "studentId":studentid,
+                        "studentName":studentname,
+                        "bookName":bookname,
+                        "bookAuthor":author,
+                        "dateOfSubmission":subdate,
+                        "status":"borrowed"
+                    }
                 if(localStorage.getItem("allrec")!=null){
                     allrecords=JSON.parse(localStorage.getItem("allrec"))
                     }else{
@@ -1033,6 +1050,7 @@ function submitBook(){
                     }
                     allrecords.push(strecord1)
                     localStorage.setItem("allrec",JSON.stringify(allrecords))
+                }()
                 msg.innerHTML=`<p>THE REQUESTED BOOK WILL BE ISSUED, PLEASE RETURN THE ${bookname.toUpperCase()} BOOK ON ${JSON.parse(subdate)} AT MORNING 9:30 A.M AT LIBRARY INCHARGE</p>`
                 submitted=true
                 function decrement(){
@@ -1261,11 +1279,11 @@ if(JSON.parse(localStorage.getItem("RTRECORDS"))!=null && (idxrtdel!=null || idx
     let authornamecheck=false
     let idx
     let backup2
-
+if(localStorage.getItem("STRECORDS")!=null){
     for(let i=0;i<JSON.parse(localStorage.getItem("STRECORDS")).length;i++){
-        console.log(JSON.parse(localStorage.getItem("STRECORDS"))[i].studentId,"==",stid)
-        if(JSON.parse(localStorage.getItem("STRECORDS")).includes(JSON.stringify(stid))!=true){
-            console.log(JSON.parse(localStorage.getItem("STRECORDS")),"   ",JSON.stringify(stid))
+        console.log(JSON.parse(localStorage.getItem("STRECORDS"))[i].studentId,"==",stid," ",JSON.parse(localStorage.getItem("STRECORDS"))[i].studentId==JSON.parse(stid))
+        if(/*JSON.parse(localStorage.getItem("STRECORDS")).includes(JSON.parse(stid))*/JSON.parse(localStorage.getItem("STRECORDS"))[i].studentId==JSON.parse(stid)==true){
+            console.log(JSON.parse(localStorage.getItem("STRECORDS")),"   ",stid)
             idcheck=true
          if(JSON.parse(localStorage.getItem("STRECORDS"))[i].studentName==stname){
             stnamecheck=true
@@ -1287,7 +1305,6 @@ if(JSON.parse(localStorage.getItem("RTRECORDS"))!=null && (idxrtdel!=null || idx
            }else{
             if(JSON.parse(localStorage.getItem("STRECORDS")).includes(bksname)!=true){
             bknamecheck=false
-            break
            }else{
             bknamecheck=false
            }
@@ -1299,6 +1316,9 @@ if(JSON.parse(localStorage.getItem("RTRECORDS"))!=null && (idxrtdel!=null || idx
         idcheck=false
        }
      }
+    }else{
+        warning.innerText=`YOU DID'NT BORROW ANY BOOK FROM US`
+    }
      let allrecords
      if(fields=="filled"){
      if(idcheck==true){
@@ -1338,13 +1358,25 @@ if(JSON.parse(localStorage.getItem("RTRECORDS"))!=null && (idxrtdel!=null || idx
                             }
                         }
                     }
-                    if(localStorage.getItem("allrec")!=null){
-                        allrecords=JSON.parse(localStorage.getItem("allrec"))
-                        }else{
-                            allrecords=[]
+                    a=function(){
+                        let d=new Date()
+                        let strecord2={
+                            "date":`${d.getDate()}-${d.getMonth()+1}-${d.getFullYear()}`,
+                            "studentId":stid,
+                            "studentName":stname,
+                            "bookName":bksname,
+                            "bookAuthor":bksauthor,
+                            "dateOfSubmission":submitdate,
+                            "status":"returned"
                         }
-                        allrecords.push(strecord2)
-                        localStorage.setItem("allrec",JSON.stringify(allrecords))
+                        if(localStorage.getItem("allrec")!=null){
+                            allrecords=JSON.parse(localStorage.getItem("allrec"))
+                            }else{
+                                allrecords=[]
+                            }
+                            allrecords.push(strecord2)
+                            localStorage.setItem("allrec",JSON.stringify(allrecords))
+                    }()
                     warning.innerText=`THE LAB INCHARGE WILL COLLECT THE ${bksname} BOOK FROM YOU.`
                 }else{
                     warning.innerText=`YOU BORROWED THE BOOK FROM DIFFERENT AUTHOR`
@@ -1376,6 +1408,22 @@ for(let i=0;i<JSON.parse(localStorage.getItem("books")).length;i++){
     table.append(rows)
 }
 // asdfgf ;lkjhj asdfgf ;lkjhj /**  */ //
+}
+
+if(location.href=="http://127.0.0.1:5500/history.html" || location.href=="http://127.0.0.1:5500/history.html#"){
+    nav()
+    let table=document.getElementById("tab2")
+    let backup=JSON.parse(localStorage.getItem("allrec"))
+    let usernames=localStorage.getItem("USERNAMES").split(",")
+    let idx=usernames.indexOf(localStorage.getItem("currentUser"))
+    console.log(idx)
+    console.table(backup)
+    if(localStorage.getItem("FNAME").split(",")[idx])
+    for(let i=0;i<JSON.parse(localStorage.getItem("allrec")).length;i++){
+        let row=document.createElement("tr")
+    row.innerHTML=`<td>${backup[i].date}</td><td>${backup[i].studentId}</td><td>${backup[i].studentName}</td><td>${backup[i].bookName}</td><td>${backup[i].bookAuthor}</td><td>${backup[i].dateOfSubmission}</td><td>${backup[i].status}</td>`   
+    table.append(row)
+} 
 }
 
 if(location.href=="http://127.0.0.1:5500/history.html" || location.href=="http://127.0.0.1:5500/history.html#"){

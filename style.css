@@ -664,7 +664,9 @@ font-size: 20px;
     width:40vw;
   height: 80vh;
   border-radius: 10px;
-  background-color: rgb(212, 0, 255);
+  position: relative;
+  z-index: 1;
+  background-color: rgb(255, 255, 255);
   margin-left:30vw;
   margin-top: 10vh;
   padding-left: 20px;   
@@ -702,7 +704,15 @@ font-size: 20px;
     margin-top: 20px;
     width: 75vw;
 }
+#infotable{
+  position: relative;
+  z-index: 1;
+  width: 0vw;
+  background-color: aqua;
+}
 #tab{
+  border: 3px solid red;
+  background-color: antiquewhite;
     margin-top: 12vh;
     margin-left: 12.5vw;
     width: 75vw;
@@ -717,4 +727,33 @@ font-size: 20px;
 }
 #tab td{
     border: 1px solid black;
+}
+
+/* HISTORY */
+#table{
+  position: relative;
+  z-index: 1;
+  width: 0vw;
+  background-color: aqua;
+}
+#tab2{
+  border: 3px solid red;
+  background-color: antiquewhite;
+  margin-top: 12vh;
+  margin-left: 12.5vw;
+  width: 75vw;
+  height: 70vh;
+  text-align: center;
+}
+#tab2 tr{
+  border: 1px solid black;
+}
+#tab2 th{
+    border: 1px solid black;
+}
+#tab2 td{
+    border: 1px solid black;
+}
+#card img{
+   height: 50vh;
 }

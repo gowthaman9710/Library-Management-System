@@ -43,6 +43,10 @@ function nav() {
   invent.addEventListener("click", function () {
     location.href = "http://127.0.0.1:5500/inventory.html";
   });
+  var explore = document.getElementById("mexplore");
+  explore.addEventListener("click", function () {
+    location.href = "http://127.0.0.1:5500/explore.html";
+  });
 }
 
 if (location.href == "http://127.0.0.1:5500/login.html" || location.href == "http://127.0.0.1:5500/login.html#") {
@@ -525,7 +529,8 @@ function bookdbcreation() {
     localStorage.setItem("books", JSON.stringify(books));
     localStorage.setItem("bookdb", "found");
   }
-}
+} //borrow books
+
 
 if (location.href == "http://127.0.0.1:5500/borrowbooks.html" || location.href == "http://127.0.0.1:5500/borrowbooks.html#") {
   nav(); //bookdbcreation()
@@ -533,6 +538,8 @@ if (location.href == "http://127.0.0.1:5500/borrowbooks.html" || location.href =
 
   borrowbooks();
 }
+
+var b_student_name;
 
 function borrowbooks() {
   var main = document.getElementById("homeabook");
@@ -845,7 +852,7 @@ function borrowbooks() {
               } else {
                 datevalid = false;
                 fields = true;
-                msg.classList.add("warningbk"); //
+                msg.classList.add("warningbk"); // 
 
                 msg.innerHTML = "Please select the correct date";
               }
@@ -1107,14 +1114,28 @@ function borrowbooks() {
             bookstate = "issued";
             msg.classList.remove("warningbk");
 
-            if (localStorage.getItem("allrec") != null) {
-              allrecords = JSON.parse(localStorage.getItem("allrec"));
-            } else {
-              allrecords = [];
-            }
+            a = function () {
+              var d = new Date();
+              var strecord1 = {
+                "date": "".concat(d.getDate(), "-").concat(d.getMonth() + 1, "-").concat(d.getFullYear()),
+                "studentId": studentid,
+                "studentName": studentname,
+                "bookName": bookname,
+                "bookAuthor": author,
+                "dateOfSubmission": subdate,
+                "status": "borrowed"
+              };
 
-            allrecords.push(strecord1);
-            localStorage.setItem("allrec", JSON.stringify(allrecords));
+              if (localStorage.getItem("allrec") != null) {
+                allrecords = JSON.parse(localStorage.getItem("allrec"));
+              } else {
+                allrecords = [];
+              }
+
+              allrecords.push(strecord1);
+              localStorage.setItem("allrec", JSON.stringify(allrecords));
+            }();
+
             msg.innerHTML = "<p>THE REQUESTED BOOK WILL BE ISSUED, PLEASE RETURN THE ".concat(bookname.toUpperCase(), " BOOK ON ").concat(JSON.parse(subdate), " AT MORNING 9:30 A.M AT LIBRARY INCHARGE</p>");
             submitted = true;
 
@@ -1285,48 +1306,53 @@ if (location.href == "http://127.0.0.1:5500/return.html" || location.href == "ht
     var idx;
     var backup2;
 
-    for (var _i20 = 0; _i20 < JSON.parse(localStorage.getItem("STRECORDS")).length; _i20++) {
-      console.log(JSON.parse(localStorage.getItem("STRECORDS"))[_i20].studentId, "==", stid);
+    if (localStorage.getItem("STRECORDS") != null) {
+      for (var _i20 = 0; _i20 < JSON.parse(localStorage.getItem("STRECORDS")).length; _i20++) {
+        console.log(JSON.parse(localStorage.getItem("STRECORDS"))[_i20].studentId, "==", stid, " ", JSON.parse(localStorage.getItem("STRECORDS"))[_i20].studentId == JSON.parse(stid));
 
-      if (JSON.parse(localStorage.getItem("STRECORDS")).includes(JSON.stringify(stid)) != true) {
-        console.log(JSON.parse(localStorage.getItem("STRECORDS")), "   ", JSON.stringify(stid));
-        idcheck = true;
+        if (
+        /*JSON.parse(localStorage.getItem("STRECORDS")).includes(JSON.parse(stid))*/
+        JSON.parse(localStorage.getItem("STRECORDS"))[_i20].studentId == JSON.parse(stid) == true) {
+          console.log(JSON.parse(localStorage.getItem("STRECORDS")), "   ", stid);
+          idcheck = true;
 
-        if (JSON.parse(localStorage.getItem("STRECORDS"))[_i20].studentName == stname) {
-          stnamecheck = true;
+          if (JSON.parse(localStorage.getItem("STRECORDS"))[_i20].studentName == stname) {
+            stnamecheck = true;
 
-          if (JSON.parse(localStorage.getItem("STRECORDS"))[_i20].bookName == bksname) {
-            bknamecheck = true;
-            console.log(JSON.parse(localStorage.getItem("STRECORDS"))[_i20].bookAuthor, "   ", bksauthor);
-            /** asdfgf ;lkjhj asdfgf */
+            if (JSON.parse(localStorage.getItem("STRECORDS"))[_i20].bookName == bksname) {
+              bknamecheck = true;
+              console.log(JSON.parse(localStorage.getItem("STRECORDS"))[_i20].bookAuthor, "   ", bksauthor);
+              /** asdfgf ;lkjhj asdfgf */
 
-            if (JSON.parse(localStorage.getItem("STRECORDS"))[_i20].bookAuthor == bksauthor) {
-              authornamecheck = true;
-              idx = _i20;
-              break;
-            } else {
-              if (JSON.parse(localStorage.getItem("STRECORDS")).includes(bksauthor) != true) {
-                authornamecheck = false;
+              if (JSON.parse(localStorage.getItem("STRECORDS"))[_i20].bookAuthor == bksauthor) {
+                authornamecheck = true;
+                idx = _i20;
                 break;
               } else {
-                authornamecheck = false;
-                /** asdfgf ;lkjhj */
+                if (JSON.parse(localStorage.getItem("STRECORDS")).includes(bksauthor) != true) {
+                  authornamecheck = false;
+                  break;
+                } else {
+                  authornamecheck = false;
+                  /** asdfgf ;lkjhj */
+                }
+              }
+            } else {
+              if (JSON.parse(localStorage.getItem("STRECORDS")).includes(bksname) != true) {
+                bknamecheck = false;
+              } else {
+                bknamecheck = false;
               }
             }
           } else {
-            if (JSON.parse(localStorage.getItem("STRECORDS")).includes(bksname) != true) {
-              bknamecheck = false;
-              break;
-            } else {
-              bknamecheck = false;
-            }
+            stnamecheck = false;
           }
         } else {
-          stnamecheck = false;
+          idcheck = false;
         }
-      } else {
-        idcheck = false;
       }
+    } else {
+      warning.innerText = "YOU DID'NT BORROW ANY BOOK FROM US";
     }
 
     var allrecords;
@@ -1373,14 +1399,28 @@ if (location.href == "http://127.0.0.1:5500/return.html" || location.href == "ht
                 }
               }
 
-              if (localStorage.getItem("allrec") != null) {
-                allrecords = JSON.parse(localStorage.getItem("allrec"));
-              } else {
-                allrecords = [];
-              }
+              a = function () {
+                var d = new Date();
+                var strecord2 = {
+                  "date": "".concat(d.getDate(), "-").concat(d.getMonth() + 1, "-").concat(d.getFullYear()),
+                  "studentId": stid,
+                  "studentName": stname,
+                  "bookName": bksname,
+                  "bookAuthor": bksauthor,
+                  "dateOfSubmission": submitdate,
+                  "status": "returned"
+                };
 
-              allrecords.push(strecord2);
-              localStorage.setItem("allrec", JSON.stringify(allrecords));
+                if (localStorage.getItem("allrec") != null) {
+                  allrecords = JSON.parse(localStorage.getItem("allrec"));
+                } else {
+                  allrecords = [];
+                }
+
+                allrecords.push(strecord2);
+                localStorage.setItem("allrec", JSON.stringify(allrecords));
+              }();
+
               warning.innerText = "THE LAB INCHARGE WILL COLLECT THE ".concat(bksname, " BOOK FROM YOU.");
             } else {
               warning.innerText = "YOU BORROWED THE BOOK FROM DIFFERENT AUTHOR";
@@ -1475,6 +1515,24 @@ if (location.href == "http://127.0.0.1:5500/inventory.html" || location.href == 
     table.append(rows);
   } // asdfgf ;lkjhj asdfgf ;lkjhj /**  */ //
 
+}
+
+if (location.href == "http://127.0.0.1:5500/history.html" || location.href == "http://127.0.0.1:5500/history.html#") {
+  nav();
+
+  var _table = document.getElementById("tab2");
+
+  var backup = JSON.parse(localStorage.getItem("allrec"));
+  var usernames = localStorage.getItem("USERNAMES").split(",");
+  var idx = usernames.indexOf(localStorage.getItem("currentUser"));
+  console.log(idx);
+  console.table(backup);
+  if (localStorage.getItem("FNAME").split(",")[idx]) for (var _i23 = 0; _i23 < JSON.parse(localStorage.getItem("allrec")).length; _i23++) {
+    var row = document.createElement("tr");
+    row.innerHTML = "<td>".concat(backup[_i23].date, "</td><td>").concat(backup[_i23].studentId, "</td><td>").concat(backup[_i23].studentName, "</td><td>").concat(backup[_i23].bookName, "</td><td>").concat(backup[_i23].bookAuthor, "</td><td>").concat(backup[_i23].dateOfSubmission, "</td><td>").concat(backup[_i23].status, "</td>");
+
+    _table.append(row);
+  }
 }
 
 if (location.href == "http://127.0.0.1:5500/history.html" || location.href == "http://127.0.0.1:5500/history.html#") {
