@@ -725,9 +725,9 @@ function setsname(e){
 // let datevalid=false
 // function setdate(e){
 //      let d=new Date()
-//     //  d.setDate(d.getUTCDate())
-//     //  d.setFullYear(d.getUTCFullYear())
-//     //  d.setMonth(d.getUTCMonth())
+//      d.setDate(d.getUTCDate())
+//      d.setFullYear(d.getUTCFullYear())
+//      d.setMonth(d.getUTCMonth())
 //      let cdate=d.getDate()
 //      let cmonth=d.getMonth()+1
 //      let cyear=d.getFullYear()
@@ -782,23 +782,11 @@ bksubmit.addEventListener("click",()=>{
         if(author!=null || author!=undefined){
             if(studentid!=null || studentid!=undefined){
                 if(studentname!=null || studentname!=undefined){
-                    if((subdate!=null || subdate!=undefined)){
                         fields=true
-                    if(datevalid==true){
                         msg.classList.remove("warningbk")
                         msg.classList.add("inv")
-                        fields=true
                         submission=true
                         submitBook()
-                    }else{
-                        datevalid=false
-                        fields=true
-                        msg.classList.add("warningbk")   // 
-                        msg.innerHTML="Please select the correct date"
-                        }
-                    }else{
-                        fields=false
-                    } 
                 }else{
                     fields=false
                 } 
@@ -1009,7 +997,9 @@ function submitBook(){
                 console.log("quantity check ok")
                 let d=new Date()
                 d.setDate(d.getDate()+30)
-                subdate=`${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`
+                d.setMonth(d.getUTCMonth())
+                subdate=`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`
+                d.setDate(d.getDate()-30)
                 let strecord1={
                     "studentId":studentid,
                     "studentName":studentname,
@@ -1036,6 +1026,10 @@ function submitBook(){
                 msg.classList.remove("warningbk")
                 a=function(){
                     let d=new Date()
+                    d.setDate(d.getDate()+30)
+                    d.setMonth(d.getUTCMonth())
+                    subdate=`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`
+                    d.setDate(d.getDate()-30)
                     let strecord1={
                         "date":`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`,
                         "studentId":studentid,
@@ -1053,8 +1047,7 @@ function submitBook(){
                     allrecords.push(strecord1)
                     localStorage.setItem("allrec",JSON.stringify(allrecords))
                 }()
-                d.setDate(d.getDate()-30)
-                msg.innerHTML=`<p>THE REQUESTED BOOK WILL BE ISSUED, PLEASE RETURN THE ${bookname.toUpperCase()} BOOK ON ${JSON.parse(subdate)} AT MORNING 9:30 A.M AT LIBRARY INCHARGE</p>`
+                msg.innerHTML=`<p>THE REQUESTED BOOK WILL BE ISSUED, PLEASE RETURN THE ${bookname.toUpperCase()} BOOK ON ${subdate} AT MORNING 9:30 A.M AT LIBRARY INCHARGE</p>`
                 submitted=true
                 function decrement(){
                     let bkbackup2=JSON.parse(localStorage.getItem("books"))
@@ -1237,14 +1230,14 @@ if(location.href=="http://127.0.0.1:5500/return.html" || location.href=="http://
    function bookauthor(e){
     bksauthor=e.value
    }    
-   dateofsub.addEventListener("change",()=>{
-      subdate(dateofsub)
-   })
-   function subdate(e){
-    console.log(e, dateofsub)
-    submitdate=e.value
-    console.log(submitdate)
-   }
+//    dateofsub.addEventListener("change",()=>{
+//       subdate(dateofsub)
+//    })
+//    function subdate(e){
+//     console.log(e, dateofsub)
+//     submitdate=e.value
+//     console.log(submitdate)
+//    }
    bksubmit.addEventListener("click",()=>{
     booksubmit()
    })
@@ -1270,7 +1263,7 @@ if(JSON.parse(localStorage.getItem("RTRECORDS"))!=null && (idxrtdel!=null || idx
     }
    function booksubmit(){
     let fields
-    if(stid!=undefined && stid!=null && stname!=null && stname!=undefined && bksname!=null && bksname!=undefined && bksauthor!=null && bksauthor!=undefined && submitdate!=null && submitdate!=undefined){
+    if(stid!=undefined && stid!=null && stname!=null && stname!=undefined && bksname!=null && bksname!=undefined && bksauthor!=null && bksauthor!=undefined){
        // warning.innerText="Please fill all the above fields"
        fields="filled"
        }else{
@@ -1328,12 +1321,13 @@ if(localStorage.getItem("STRECORDS")!=null){
         if(stnamecheck==true){
             if(bknamecheck==true){
                 if(authornamecheck==true){
+                    let d=new Date()
                     let strecord2={
-                        "studentId":stid,
+                        "studentId":JSON.parse(stid),
                         "studentName":stname,
                         "bookName":bksname,
                         "bookAuthor":bksauthor,
-                        "dateOfSubmission":`${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`
+                        "dateOfSubmission":`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`
                     }
                     // strecord.set("studentId",studentid)
                     // strecord.set("studentName",studentname)
@@ -1364,12 +1358,12 @@ if(localStorage.getItem("STRECORDS")!=null){
                     a=function(){
                         let d=new Date()
                         let strecord2={
-                            "date":`${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`,
-                            "studentId":stid,
+                            "date":`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`,
+                            "studentId":JSON.parse(stid),
                             "studentName":stname,
                             "bookName":bksname,
                             "bookAuthor":bksauthor,
-                            "dateOfSubmission":`${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`,
+                            "dateOfSubmission":`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`,
                             "status":"returned"
                         }
                         if(localStorage.getItem("allrec")!=null){

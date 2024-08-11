@@ -761,6 +761,16 @@ font-size: 20px;
 }
 
 /* explore */
+#main1 a{
+  margin-top: 9vh;
+   position: absolute;
+   bottom: 10px;
+}
+#main2 a{
+  margin-top: 9vh;
+   position: absolute;
+   bottom: 10px;
+}
 #explorebody h1{
   margin-left: 20px;
   margin-top: 20px;
@@ -770,6 +780,9 @@ font-size: 20px;
 }
 .card{
   margin-top: 5vh;
+}
+#card{
+  height: 95vh;
 }
 #card img{
   margin-top: 0vh;

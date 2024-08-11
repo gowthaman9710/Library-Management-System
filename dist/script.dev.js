@@ -778,9 +778,9 @@ function borrowbooks() {
   // let datevalid=false
   // function setdate(e){
   //      let d=new Date()
-  //     //  d.setDate(d.getUTCDate())
-  //     //  d.setFullYear(d.getUTCFullYear())
-  //     //  d.setMonth(d.getUTCMonth())
+  //      d.setDate(d.getUTCDate())
+  //      d.setFullYear(d.getUTCFullYear())
+  //      d.setMonth(d.getUTCMonth())
   //      let cdate=d.getDate()
   //      let cmonth=d.getMonth()+1
   //      let cyear=d.getFullYear()
@@ -837,25 +837,11 @@ function borrowbooks() {
       if (author != null || author != undefined) {
         if (studentid != null || studentid != undefined) {
           if (studentname != null || studentname != undefined) {
-            if (subdate != null || subdate != undefined) {
-              fields = true;
-
-              if (datevalid == true) {
-                msg.classList.remove("warningbk");
-                msg.classList.add("inv");
-                fields = true;
-                submission = true;
-                submitBook();
-              } else {
-                datevalid = false;
-                fields = true;
-                msg.classList.add("warningbk"); // 
-
-                msg.innerHTML = "Please select the correct date";
-              }
-            } else {
-              fields = false;
-            }
+            fields = true;
+            msg.classList.remove("warningbk");
+            msg.classList.add("inv");
+            submission = true;
+            submitBook();
           } else {
             fields = false;
           }
@@ -1083,12 +1069,11 @@ function borrowbooks() {
             };
 
             console.log("quantity check ok");
-
-            var _d = new Date();
-
-            _d.setDate(_d.getDate() + 30);
-
-            subdate = "".concat(_d.getDate(), "/").concat(_d.getMonth(), "/").concat(_d.getFullYear());
+            var d = new Date();
+            d.setDate(d.getDate() + 30);
+            d.setMonth(d.getUTCMonth());
+            subdate = "".concat(d.getDate(), "/").concat(d.getMonth() + 1, "/").concat(d.getFullYear());
+            d.setDate(d.getDate() - 30);
             var strecord1 = {
               "studentId": studentid,
               "studentName": studentname,
@@ -1119,6 +1104,10 @@ function borrowbooks() {
 
             a = function () {
               var d = new Date();
+              d.setDate(d.getDate() + 30);
+              d.setMonth(d.getUTCMonth());
+              subdate = "".concat(d.getDate(), "/").concat(d.getMonth() + 1, "/").concat(d.getFullYear());
+              d.setDate(d.getDate() - 30);
               var strecord1 = {
                 "date": "".concat(d.getDate(), "/").concat(d.getMonth() + 1, "/").concat(d.getFullYear()),
                 "studentId": studentid,
@@ -1139,9 +1128,7 @@ function borrowbooks() {
               localStorage.setItem("allrec", JSON.stringify(allrecords));
             }();
 
-            _d.setDate(_d.getDate() - 30);
-
-            msg.innerHTML = "<p>THE REQUESTED BOOK WILL BE ISSUED, PLEASE RETURN THE ".concat(bookname.toUpperCase(), " BOOK ON ").concat(JSON.parse(subdate), " AT MORNING 9:30 A.M AT LIBRARY INCHARGE</p>");
+            msg.innerHTML = "<p>THE REQUESTED BOOK WILL BE ISSUED, PLEASE RETURN THE ".concat(bookname.toUpperCase(), " BOOK ON ").concat(subdate, " AT MORNING 9:30 A.M AT LIBRARY INCHARGE</p>");
             submitted = true;
 
             if (localStorage.getItem("books") != null) {
@@ -1286,18 +1273,20 @@ if (location.href == "http://127.0.0.1:5500/return.html" || location.href == "ht
 
   var bookauthor = function bookauthor(e) {
     bksauthor = e.value;
-  };
+  }; //    dateofsub.addEventListener("change",()=>{
+  //       subdate(dateofsub)
+  //    })
+  //    function subdate(e){
+  //     console.log(e, dateofsub)
+  //     submitdate=e.value
+  //     console.log(submitdate)
+  //    }
 
-  var subdate = function subdate(e) {
-    console.log(e, dateofsub);
-    submitdate = e.value;
-    console.log(submitdate);
-  };
 
   var booksubmit = function booksubmit() {
     var fields;
 
-    if (stid != undefined && stid != null && stname != null && stname != undefined && bksname != null && bksname != undefined && bksauthor != null && bksauthor != undefined && submitdate != null && submitdate != undefined) {
+    if (stid != undefined && stid != null && stname != null && stname != undefined && bksname != null && bksname != undefined && bksauthor != null && bksauthor != undefined) {
       // warning.innerText="Please fill all the above fields"
       fields = "filled";
     } else {
@@ -1367,12 +1356,13 @@ if (location.href == "http://127.0.0.1:5500/return.html" || location.href == "ht
         if (stnamecheck == true) {
           if (bknamecheck == true) {
             if (authornamecheck == true) {
+              var d = new Date();
               var strecord2 = {
-                "studentId": stid,
+                "studentId": JSON.parse(stid),
                 "studentName": stname,
                 "bookName": bksname,
                 "bookAuthor": bksauthor,
-                "dateOfSubmission": "".concat(d.getDate(), "-").concat(d.getMonth(), "-").concat(d.getFullYear())
+                "dateOfSubmission": "".concat(d.getDate(), "/").concat(d.getMonth() + 1, "/").concat(d.getFullYear())
               }; // strecord.set("studentId",studentid)
               // strecord.set("studentName",studentname)
               // strecord.set("bookName",bookname)
@@ -1407,12 +1397,12 @@ if (location.href == "http://127.0.0.1:5500/return.html" || location.href == "ht
               a = function () {
                 var d = new Date();
                 var strecord2 = {
-                  "date": "".concat(d.getDate(), "-").concat(d.getMonth(), "-").concat(d.getFullYear()),
-                  "studentId": stid,
+                  "date": "".concat(d.getDate(), "/").concat(d.getMonth() + 1, "/").concat(d.getFullYear()),
+                  "studentId": JSON.parse(stid),
                   "studentName": stname,
                   "bookName": bksname,
                   "bookAuthor": bksauthor,
-                  "dateOfSubmission": "".concat(d.getDate(), "-").concat(d.getMonth(), "-").concat(d.getFullYear()),
+                  "dateOfSubmission": "".concat(d.getDate(), "/").concat(d.getMonth() + 1, "/").concat(d.getFullYear()),
                   "status": "returned"
                 };
 
@@ -1478,9 +1468,6 @@ if (location.href == "http://127.0.0.1:5500/return.html" || location.href == "ht
   });
   bkauth.addEventListener("keyup", function () {
     bookauthor(bkauth);
-  });
-  dateofsub.addEventListener("change", function () {
-    subdate(dateofsub);
   });
   bksubmit.addEventListener("click", function () {
     booksubmit();
