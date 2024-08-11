@@ -20,7 +20,7 @@ mlogout.addEventListener("click",()=>{
     localStorage.status="failure"
     sessionStorage.validate="failure"
     location.href="http://127.0.0.1:5500/login.html"
-})
+})//aas
 let borrowbooks=document.getElementById("borrowbooks")
 borrowbooks.addEventListener("click",()=>{
     console.log("event occurs")
@@ -719,62 +719,61 @@ function setsname(e){
     studentname=e.toLowerCase()
     console.log(studentname)
 }
-dateofsub.addEventListener("change",()=>{
-     setdate(dateofsub)
-})
-let datevalid=false
-function setdate(e){
-     let d=new Date()
-    //  d.setDate(d.getUTCDate())
-    //  d.setFullYear(d.getUTCFullYear())
-    //  d.setMonth(d.getUTCMonth())
-     let cdate=d.getDate()
-     let cmonth=d.getMonth()+1
-     let cyear=d.getFullYear()
-     if(parseInt((e.value).split("-")[0])>=cyear){
-        if(parseInt((e.value).split("-")[1])>=cmonth){
-            if(parseInt((e.value).split("-")[2])>cdate){
-                console.log("date ok")
-                msg.classList.remove("warningbk")
-                msg.classList.remove("vis")
-                msg.classList.add("inv")
-                datevalid=true
-                subdate=JSON.stringify(e.value)
-            }else{
-                if(parseInt((e.value).split("-")[1])>cmonth){
-                    console.log("date ok")
-                    datevalid=true
-                    msg.classList.remove("warningbk")
-                    msg.classList.remove("vis")
-                    msg.classList.add("inv")
-                    subdate=JSON.stringify(e.value)
-                }else{
-                console.log("date not ok")
-                datevalid=false
-                msg.classList.add("warningbk")
-                subdate=JSON.stringify(e.value)
-                msg.innerHTML="Please select the correct date"
-                } 
-            }
-        }else{
-            console.log("date not ok")
-            datevalid=false
-            msg.classList.add("warningbk")
-            subdate=JSON.stringify(e.value)
-            msg.innerHTML="Please select the correct month"
-         }
-     }else{
-        console.log("date not ok")
-        datevalid=false
-        msg.classList.add("warningbk")
-        subdate=JSON.stringify(e.value)
-        msg.innerHTML="Please select the correct year"
-     }
-     console.log(e.value)
-     console.log(parseInt((e.value).split("-")[1]))
-     console.log(`${cyear}-${0}${cmonth}-${cdate}`)
-
-}
+// dateofsub.addEventListener("change",()=>{
+//      setdate(dateofsub)
+// })
+// let datevalid=false
+// function setdate(e){
+//      let d=new Date()
+//     //  d.setDate(d.getUTCDate())
+//     //  d.setFullYear(d.getUTCFullYear())
+//     //  d.setMonth(d.getUTCMonth())
+//      let cdate=d.getDate()
+//      let cmonth=d.getMonth()+1
+//      let cyear=d.getFullYear()
+//      if(parseInt((e.value).split("-")[0])>=cyear){
+//         if(parseInt((e.value).split("-")[1])>=cmonth){
+//             if(parseInt((e.value).split("-")[2])>cdate){
+//                 console.log("date ok")
+//                 msg.classList.remove("warningbk")
+//                 msg.classList.remove("vis")
+//                 msg.classList.add("inv")
+//                 datevalid=true
+//                 subdate=JSON.stringify(e.value)
+//             }else{
+//                 if(parseInt((e.value).split("-")[1])>cmonth){
+//                     console.log("date ok")
+//                     datevalid=true
+//                     msg.classList.remove("warningbk")
+//                     msg.classList.remove("vis")
+//                     msg.classList.add("inv")
+//                     subdate=JSON.stringify(e.value)
+//                 }else{
+//                 console.log("date not ok")
+//                 datevalid=false
+//                 msg.classList.add("warningbk")
+//                 subdate=JSON.stringify(e.value)
+//                 msg.innerHTML="Please select the correct date"
+//                 } 
+//             }
+//         }else{
+//             console.log("date not ok")
+//             datevalid=false
+//             msg.classList.add("warningbk")
+//             subdate=JSON.stringify(e.value)
+//             msg.innerHTML="Please select the correct month"
+//          }
+//      }else{
+//         console.log("date not ok")
+//         datevalid=false
+//         msg.classList.add("warningbk")
+//         subdate=JSON.stringify(e.value)
+//         msg.innerHTML="Please select the correct year"
+//      }
+//      console.log(e.value)
+//      console.log(parseInt((e.value).split("-")[1]))
+//      console.log(`${cyear}-${0}${cmonth}-${cdate}`)
+// }
 let fields=false
 let submission=false
 let newptag=document.createElement("p")
@@ -1008,6 +1007,9 @@ function submitBook(){
         if(authoravail[1]=="success"){
             if(quantityavail[1]=="success" && submitted!=true && isrecordinside!=true){
                 console.log("quantity check ok")
+                let d=new Date()
+                d.setDate(d.getDate()+30)
+                subdate=`${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`
                 let strecord1={
                     "studentId":studentid,
                     "studentName":studentname,
@@ -1035,7 +1037,7 @@ function submitBook(){
                 a=function(){
                     let d=new Date()
                     let strecord1={
-                        "date":`${d.getDate()}-${d.getMonth()+1}-${d.getFullYear()}`,
+                        "date":`${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`,
                         "studentId":studentid,
                         "studentName":studentname,
                         "bookName":bookname,
@@ -1051,6 +1053,7 @@ function submitBook(){
                     allrecords.push(strecord1)
                     localStorage.setItem("allrec",JSON.stringify(allrecords))
                 }()
+                d.setDate(d.getDate()-30)
                 msg.innerHTML=`<p>THE REQUESTED BOOK WILL BE ISSUED, PLEASE RETURN THE ${bookname.toUpperCase()} BOOK ON ${JSON.parse(subdate)} AT MORNING 9:30 A.M AT LIBRARY INCHARGE</p>`
                 submitted=true
                 function decrement(){
@@ -1330,7 +1333,7 @@ if(localStorage.getItem("STRECORDS")!=null){
                         "studentName":stname,
                         "bookName":bksname,
                         "bookAuthor":bksauthor,
-                        "dateOfSubmission":submitdate
+                        "dateOfSubmission":`${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`
                     }
                     // strecord.set("studentId",studentid)
                     // strecord.set("studentName",studentname)
@@ -1361,12 +1364,12 @@ if(localStorage.getItem("STRECORDS")!=null){
                     a=function(){
                         let d=new Date()
                         let strecord2={
-                            "date":`${d.getDate()}-${d.getMonth()+1}-${d.getFullYear()}`,
+                            "date":`${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`,
                             "studentId":stid,
                             "studentName":stname,
                             "bookName":bksname,
                             "bookAuthor":bksauthor,
-                            "dateOfSubmission":submitdate,
+                            "dateOfSubmission":`${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`,
                             "status":"returned"
                         }
                         if(localStorage.getItem("allrec")!=null){
@@ -1426,7 +1429,7 @@ if(location.href=="http://127.0.0.1:5500/history.html" || location.href=="http:/
 } 
 }
 
-if(location.href=="http://127.0.0.1:5500/history.html" || location.href=="http://127.0.0.1:5500/history.html#"){
+if(location.href=="http://127.0.0.1:5500/explore.html" || location.href=="http://127.0.0.1:5500/explore.html#"){
     nav()
-
+     
 }

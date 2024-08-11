@@ -25,7 +25,8 @@ function nav() {
     localStorage.status = "failure";
     sessionStorage.validate = "failure";
     location.href = "http://127.0.0.1:5500/login.html";
-  });
+  }); //aas
+
   var borrowbooks = document.getElementById("borrowbooks");
   borrowbooks.addEventListener("click", function () {
     console.log("event occurs");
@@ -771,66 +772,62 @@ function borrowbooks() {
   function setsname(e) {
     studentname = e.toLowerCase();
     console.log(studentname);
-  }
+  } // dateofsub.addEventListener("change",()=>{
+  //      setdate(dateofsub)
+  // })
+  // let datevalid=false
+  // function setdate(e){
+  //      let d=new Date()
+  //     //  d.setDate(d.getUTCDate())
+  //     //  d.setFullYear(d.getUTCFullYear())
+  //     //  d.setMonth(d.getUTCMonth())
+  //      let cdate=d.getDate()
+  //      let cmonth=d.getMonth()+1
+  //      let cyear=d.getFullYear()
+  //      if(parseInt((e.value).split("-")[0])>=cyear){
+  //         if(parseInt((e.value).split("-")[1])>=cmonth){
+  //             if(parseInt((e.value).split("-")[2])>cdate){
+  //                 console.log("date ok")
+  //                 msg.classList.remove("warningbk")
+  //                 msg.classList.remove("vis")
+  //                 msg.classList.add("inv")
+  //                 datevalid=true
+  //                 subdate=JSON.stringify(e.value)
+  //             }else{
+  //                 if(parseInt((e.value).split("-")[1])>cmonth){
+  //                     console.log("date ok")
+  //                     datevalid=true
+  //                     msg.classList.remove("warningbk")
+  //                     msg.classList.remove("vis")
+  //                     msg.classList.add("inv")
+  //                     subdate=JSON.stringify(e.value)
+  //                 }else{
+  //                 console.log("date not ok")
+  //                 datevalid=false
+  //                 msg.classList.add("warningbk")
+  //                 subdate=JSON.stringify(e.value)
+  //                 msg.innerHTML="Please select the correct date"
+  //                 } 
+  //             }
+  //         }else{
+  //             console.log("date not ok")
+  //             datevalid=false
+  //             msg.classList.add("warningbk")
+  //             subdate=JSON.stringify(e.value)
+  //             msg.innerHTML="Please select the correct month"
+  //          }
+  //      }else{
+  //         console.log("date not ok")
+  //         datevalid=false
+  //         msg.classList.add("warningbk")
+  //         subdate=JSON.stringify(e.value)
+  //         msg.innerHTML="Please select the correct year"
+  //      }
+  //      console.log(e.value)
+  //      console.log(parseInt((e.value).split("-")[1]))
+  //      console.log(`${cyear}-${0}${cmonth}-${cdate}`)
+  // }
 
-  dateofsub.addEventListener("change", function () {
-    setdate(dateofsub);
-  });
-  var datevalid = false;
-
-  function setdate(e) {
-    var d = new Date(); //  d.setDate(d.getUTCDate())
-    //  d.setFullYear(d.getUTCFullYear())
-    //  d.setMonth(d.getUTCMonth())
-
-    var cdate = d.getDate();
-    var cmonth = d.getMonth() + 1;
-    var cyear = d.getFullYear();
-
-    if (parseInt(e.value.split("-")[0]) >= cyear) {
-      if (parseInt(e.value.split("-")[1]) >= cmonth) {
-        if (parseInt(e.value.split("-")[2]) > cdate) {
-          console.log("date ok");
-          msg.classList.remove("warningbk");
-          msg.classList.remove("vis");
-          msg.classList.add("inv");
-          datevalid = true;
-          subdate = JSON.stringify(e.value);
-        } else {
-          if (parseInt(e.value.split("-")[1]) > cmonth) {
-            console.log("date ok");
-            datevalid = true;
-            msg.classList.remove("warningbk");
-            msg.classList.remove("vis");
-            msg.classList.add("inv");
-            subdate = JSON.stringify(e.value);
-          } else {
-            console.log("date not ok");
-            datevalid = false;
-            msg.classList.add("warningbk");
-            subdate = JSON.stringify(e.value);
-            msg.innerHTML = "Please select the correct date";
-          }
-        }
-      } else {
-        console.log("date not ok");
-        datevalid = false;
-        msg.classList.add("warningbk");
-        subdate = JSON.stringify(e.value);
-        msg.innerHTML = "Please select the correct month";
-      }
-    } else {
-      console.log("date not ok");
-      datevalid = false;
-      msg.classList.add("warningbk");
-      subdate = JSON.stringify(e.value);
-      msg.innerHTML = "Please select the correct year";
-    }
-
-    console.log(e.value);
-    console.log(parseInt(e.value.split("-")[1]));
-    console.log("".concat(cyear, "-", 0).concat(cmonth, "-").concat(cdate));
-  }
 
   var fields = false;
   var submission = false;
@@ -1086,6 +1083,12 @@ function borrowbooks() {
             };
 
             console.log("quantity check ok");
+
+            var _d = new Date();
+
+            _d.setDate(_d.getDate() + 30);
+
+            subdate = "".concat(_d.getDate(), "/").concat(_d.getMonth(), "/").concat(_d.getFullYear());
             var strecord1 = {
               "studentId": studentid,
               "studentName": studentname,
@@ -1117,7 +1120,7 @@ function borrowbooks() {
             a = function () {
               var d = new Date();
               var strecord1 = {
-                "date": "".concat(d.getDate(), "-").concat(d.getMonth() + 1, "-").concat(d.getFullYear()),
+                "date": "".concat(d.getDate(), "/").concat(d.getMonth() + 1, "/").concat(d.getFullYear()),
                 "studentId": studentid,
                 "studentName": studentname,
                 "bookName": bookname,
@@ -1135,6 +1138,8 @@ function borrowbooks() {
               allrecords.push(strecord1);
               localStorage.setItem("allrec", JSON.stringify(allrecords));
             }();
+
+            _d.setDate(_d.getDate() - 30);
 
             msg.innerHTML = "<p>THE REQUESTED BOOK WILL BE ISSUED, PLEASE RETURN THE ".concat(bookname.toUpperCase(), " BOOK ON ").concat(JSON.parse(subdate), " AT MORNING 9:30 A.M AT LIBRARY INCHARGE</p>");
             submitted = true;
@@ -1367,7 +1372,7 @@ if (location.href == "http://127.0.0.1:5500/return.html" || location.href == "ht
                 "studentName": stname,
                 "bookName": bksname,
                 "bookAuthor": bksauthor,
-                "dateOfSubmission": submitdate
+                "dateOfSubmission": "".concat(d.getDate(), "-").concat(d.getMonth(), "-").concat(d.getFullYear())
               }; // strecord.set("studentId",studentid)
               // strecord.set("studentName",studentname)
               // strecord.set("bookName",bookname)
@@ -1402,12 +1407,12 @@ if (location.href == "http://127.0.0.1:5500/return.html" || location.href == "ht
               a = function () {
                 var d = new Date();
                 var strecord2 = {
-                  "date": "".concat(d.getDate(), "-").concat(d.getMonth() + 1, "-").concat(d.getFullYear()),
+                  "date": "".concat(d.getDate(), "-").concat(d.getMonth(), "-").concat(d.getFullYear()),
                   "studentId": stid,
                   "studentName": stname,
                   "bookName": bksname,
                   "bookAuthor": bksauthor,
-                  "dateOfSubmission": submitdate,
+                  "dateOfSubmission": "".concat(d.getDate(), "-").concat(d.getMonth(), "-").concat(d.getFullYear()),
                   "status": "returned"
                 };
 
@@ -1535,6 +1540,6 @@ if (location.href == "http://127.0.0.1:5500/history.html" || location.href == "h
   }
 }
 
-if (location.href == "http://127.0.0.1:5500/history.html" || location.href == "http://127.0.0.1:5500/history.html#") {
+if (location.href == "http://127.0.0.1:5500/explore.html" || location.href == "http://127.0.0.1:5500/explore.html#") {
   nav();
 }

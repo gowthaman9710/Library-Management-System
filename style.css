@@ -730,8 +730,11 @@ font-size: 20px;
 }
 
 /* HISTORY */
+#historybody{
+  background-color:rgba(165, 42, 124, 0.651);
+}
 #table{
-  position: relative;
+  position: static;
   z-index: 1;
   width: 0vw;
   background-color: aqua;
@@ -740,9 +743,11 @@ font-size: 20px;
   border: 3px solid red;
   background-color: antiquewhite;
   margin-top: 12vh;
+  margin-top: 2vh;
   margin-left: 12.5vw;
-  width: 75vw;
-  height: 70vh;
+  margin-left: 0vw;
+  width: 100vw;
+  height: auto;
   text-align: center;
 }
 #tab2 tr{
@@ -754,6 +759,27 @@ font-size: 20px;
 #tab2 td{
     border: 1px solid black;
 }
+
+/* explore */
+#explorebody h1{
+  margin-left: 20px;
+  margin-top: 20px;
+}
+#explorebody a{
+ margin-left: 20px;
+}
+.card{
+  margin-top: 5vh;
+}
 #card img{
+  margin-top: 0vh;
    height: 50vh;
+}
+#main1{
+  display: grid;
+  grid-template-columns: 55vh 55vh 55vh 55vh;
+}
+#main2{
+  display: grid;
+  grid-template-columns: 55vh 55vh 55vh 55vh;
 }
