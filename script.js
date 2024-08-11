@@ -614,29 +614,29 @@ if(localStorage.getItem("records")==null || localStorage.getItem("records")==und
     localStorage.setItem("records",1)
 }
 
-let records=[]
-let recordkeys=[]
-for(let i=0;i<localStorage.length;i++){
-    if(isNaN(localStorage.key(i))==false){
-        records.push(JSON.parse(localStorage.getItem(localStorage.key(i))))         
-        recordkeys.push(parseInt(localStorage.key(i)))
-    }
-}
+// let records=[]
+// let recordkeys=[]
+// for(let i=0;i<localStorage.length;i++){
+//     if(isNaN(localStorage.key(i))==false){
+//         records.push(JSON.parse(localStorage.getItem(localStorage.key(i))))         
+//         recordkeys.push(parseInt(localStorage.key(i)))
+//     }
+// }
 
 
-console.log(recordkeys)
-console.log(sortednums)
-console.log(localStorage.getItem(1))
+// console.log(recordkeys)
+// console.log(sortednums)
+// console.log(localStorage.getItem(1))
 
 let val
 ///////////////////////////////////////////////////////////
-let current=[]                                            //
-current[0]=localStorage.getItem("records")                 //      
-localStorage.setItem("current",current[0])                  //         
-console.log(current)                                        //
-if(current[0]<localStorage.getItem("current")){             //
-   localStorage.setItem("highest",1)                        //
-}                                                         //
+// let current=[]                                            //
+// current[0]=localStorage.getItem("records")                 //      
+// localStorage.setItem("current",current[0])                  //         
+// console.log(current)                                        //
+// if(current[0]<localStorage.getItem("current")){             //
+//    localStorage.setItem("highest",1)                        //
+// }                                                         //
 //////////////////////////////////////////////////////////
 
 if(localStorage.getItem("totalrecords")!=null){
@@ -1415,12 +1415,14 @@ if(location.href=="https://gowthaman9710.github.io/Library-Management-System/his
     let idx=usernames.indexOf(localStorage.getItem("currentUser"))
     console.log(idx)
     console.table(backup)
-    if(localStorage.getItem("FNAME").split(",")[idx])
+    if(localStorage.getItem("FNAME").split(",")[idx]){
+    if(JSON.parse(localStorage.getItem("allrec"))!=null)
     for(let i=0;i<JSON.parse(localStorage.getItem("allrec")).length;i++){
         let row=document.createElement("tr")
     row.innerHTML=`<td>${backup[i].date}</td><td>${backup[i].studentId}</td><td>${backup[i].studentName}</td><td>${backup[i].bookName}</td><td>${backup[i].bookAuthor}</td><td>${backup[i].dateOfSubmission}</td><td>${backup[i].status}</td>`   
     table.append(row)
 } 
+    }
 }
 
 if(location.href=="https://gowthaman9710.github.io/Library-Management-System/explore.html" || location.href=="https://gowthaman9710.github.io/Library-Management-System/explore.html#"){

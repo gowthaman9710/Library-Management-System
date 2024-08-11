@@ -653,37 +653,28 @@ function borrowbooks() {
 
   if (localStorage.getItem("records") == null || localStorage.getItem("records") == undefined) {
     localStorage.setItem("records", 1);
-  }
+  } // let records=[]
+  // let recordkeys=[]
+  // for(let i=0;i<localStorage.length;i++){
+  //     if(isNaN(localStorage.key(i))==false){
+  //         records.push(JSON.parse(localStorage.getItem(localStorage.key(i))))         
+  //         recordkeys.push(parseInt(localStorage.key(i)))
+  //     }
+  // }
+  // console.log(recordkeys)
+  // console.log(sortednums)
+  // console.log(localStorage.getItem(1))
 
-  var records = [];
-  var recordkeys = [];
 
-  for (var _i9 = 0; _i9 < localStorage.length; _i9++) {
-    if (isNaN(localStorage.key(_i9)) == false) {
-      records.push(JSON.parse(localStorage.getItem(localStorage.key(_i9))));
-      recordkeys.push(parseInt(localStorage.key(_i9)));
-    }
-  }
-
-  console.log(recordkeys);
-  console.log(sortednums);
-  console.log(localStorage.getItem(1));
   var val; ///////////////////////////////////////////////////////////
-
-  var current = []; //
-
-  current[0] = localStorage.getItem("records"); //      
-
-  localStorage.setItem("current", current[0]); //         
-
-  console.log(current); //
-
-  if (current[0] < localStorage.getItem("current")) {
-    //
-    localStorage.setItem("highest", 1); //
-  } //
+  // let current=[]                                            //
+  // current[0]=localStorage.getItem("records")                 //      
+  // localStorage.setItem("current",current[0])                  //         
+  // console.log(current)                                        //
+  // if(current[0]<localStorage.getItem("current")){             //
+  //    localStorage.setItem("highest",1)                        //
+  // }                                                         //
   //////////////////////////////////////////////////////////
-
 
   if (localStorage.getItem("totalrecords") != null) {
     console.log(
@@ -886,11 +877,11 @@ function borrowbooks() {
       msg.classList.add("vis");
       msg.classList.remove("inv");
 
-      for (var _i10 = 0; _i10 < localStorage.length; _i10++) {
-        console.log(localStorage.key(_i10));
+      for (var _i9 = 0; _i9 < localStorage.length; _i9++) {
+        console.log(localStorage.key(_i9));
 
-        if (localStorage.key(_i10) == loopCount) {
-          console.log(localStorage.key(_i10));
+        if (localStorage.key(_i9) == loopCount) {
+          console.log(localStorage.key(_i9));
           console.log("loopCount:", loopCount);
           localStorage.setItem("records", loopCount);
           loopCount = parseInt(localStorage.getItem("records")) + 1;
@@ -917,10 +908,10 @@ function borrowbooks() {
       console.log(booknames);
       console.log(bookname); //----------------------------------
 
-      for (var _i11 = 0; _i11 < booknames.length; _i11++) {
-        if (booknames[_i11] == bookname) {
-          bi.push(_i11);
-          bkscheck.push([_i11, booknames[_i11], authornames[_i11], quantities[_i11]]);
+      for (var _i10 = 0; _i10 < booknames.length; _i10++) {
+        if (booknames[_i10] == bookname) {
+          bi.push(_i10);
+          bkscheck.push([_i10, booknames[_i10], authornames[_i10], quantities[_i10]]);
           console.log(bkscheck);
         }
       } // for(let i=0;i<bi.length;i++){
@@ -940,32 +931,32 @@ function borrowbooks() {
       //-------------------------------------------------
 
 
-      for (var _i12 = 0; _i12 < bkscheck.length; _i12++) {
-        if (bkscheck[_i12][1] == bookname) {
-          localStorage.setItem("bkavail:".concat(bi[_i12]), [1]);
-          bookavail = [_i12, "success"];
+      for (var _i11 = 0; _i11 < bkscheck.length; _i11++) {
+        if (bkscheck[_i11][1] == bookname) {
+          localStorage.setItem("bkavail:".concat(bi[_i11]), [1]);
+          bookavail = [_i11, "success"];
           console.log("book available ", bookavail);
           break;
         } else {
-          localStorage.setItem("bkavail:".concat(_i12), [0]);
-          bookavail = [_i12, "failure"];
+          localStorage.setItem("bkavail:".concat(_i11), [0]);
+          bookavail = [_i11, "failure"];
           console.log("book unavailable ", bookavail);
         }
       } //-------------------------------------------------
 
 
-      for (var _i13 = 0; _i13 < bkscheck.length; _i13++) {
-        if (bkscheck[_i13][2] == author) {
-          localStorage.setItem("authavail:".concat(_i13), [1]);
+      for (var _i12 = 0; _i12 < bkscheck.length; _i12++) {
+        if (bkscheck[_i12][2] == author) {
+          localStorage.setItem("authavail:".concat(_i12), [1]);
           ai = authornames.indexOf(author);
-          authcheck.push([_i13, authornames[_i13]]);
+          authcheck.push([_i12, authornames[_i12]]);
           console.log(authcheck);
-          authoravail = [_i13, "success"];
+          authoravail = [_i12, "success"];
           console.log("author available ", authoravail);
           break;
         } else {
-          localStorage.setItem("authavail:".concat(_i13), [0]);
-          authoravail = [_i13, "failure"];
+          localStorage.setItem("authavail:".concat(_i12), [0]);
+          authoravail = [_i12, "failure"];
           console.log("author unavailable ", authoravail);
         }
       } //-------------------------------------------------
@@ -994,15 +985,15 @@ function borrowbooks() {
       //----------------------------------------------------
 
 
-      for (var _i14 = 0; _i14 < bkscheck.length; _i14++) {
-        if (bkscheck[_i14][3] >= 1) {
+      for (var _i13 = 0; _i13 < bkscheck.length; _i13++) {
+        if (bkscheck[_i13][3] >= 1) {
           localStorage.setItem("quavail:".concat(ai), [1]);
-          quantityavail = [_i14, "success"];
+          quantityavail = [_i13, "success"];
           console.log("quantity available ", quantityavail);
           break;
         } else {
           localStorage.setItem("quavail:".concat(ai), [0]);
-          quantityavail = [_i14, "failure"];
+          quantityavail = [_i13, "failure"];
           console.log("quantity unavailable ", quantityavail);
         }
       } //----------------------------------------------------
@@ -1058,10 +1049,10 @@ function borrowbooks() {
             var decrement = function decrement() {
               var bkbackup2 = JSON.parse(localStorage.getItem("books"));
 
-              for (var _i15 = 0; _i15 < JSON.parse(localStorage.getItem("books")).length; _i15++) {
-                if (JSON.parse(localStorage.getItem("books"))[_i15].name == bookname) {
-                  if (JSON.parse(localStorage.getItem("books"))[_i15].author == author) {
-                    bkbackup2[_i15].quantity -= 1;
+              for (var _i14 = 0; _i14 < JSON.parse(localStorage.getItem("books")).length; _i14++) {
+                if (JSON.parse(localStorage.getItem("books"))[_i14].name == bookname) {
+                  if (JSON.parse(localStorage.getItem("books"))[_i14].author == author) {
+                    bkbackup2[_i14].quantity -= 1;
                     localStorage.setItem("books", JSON.stringify(bkbackup2));
                   }
                 }
@@ -1157,10 +1148,10 @@ function borrowbooks() {
           msg.classList.add("warningbk");
           msg.innerHTML = "<p>THE REQUESTED BOOK WITH THE DIFFERENT AUTHOR IS AVAILABLE</p>";
 
-          for (var _i16 = 0; _i16 < authornames.length; _i16++) {
-            if (bookname == booknames[_i16]) {
+          for (var _i15 = 0; _i15 < authornames.length; _i15++) {
+            if (bookname == booknames[_i15]) {
               var newptag4 = document.createElement("p");
-              newptag4.innerHTML = "<b>".concat(authornames[_i16], "</b>");
+              newptag4.innerHTML = "<b>".concat(authornames[_i15], "</b>");
               msg.append(newptag4);
               msg.classList.add("pad");
             }
@@ -1216,20 +1207,20 @@ function borrowbooks() {
     var stname = []; //console.log(JSON.parse(localStorage.getItem("STRECORDS"))[0].studentId)
 
     if (JSON.parse(localStorage.getItem("STRECORDS")) != null) {
-      for (var _i17 = 0; _i17 < JSON.parse(localStorage.getItem("STRECORDS")).length; _i17++) {
-        stid.push(JSON.parse(localStorage.getItem("STRECORDS"))[_i17].studentId);
-        bname.push(JSON.parse(localStorage.getItem("STRECORDS"))[_i17].bookName);
-        stname.push(JSON.parse(localStorage.getItem("STRECORDS"))[_i17].studentName);
-        bauthor.push(JSON.parse(localStorage.getItem("STRECORDS"))[_i17].bookAuthor);
+      for (var _i16 = 0; _i16 < JSON.parse(localStorage.getItem("STRECORDS")).length; _i16++) {
+        stid.push(JSON.parse(localStorage.getItem("STRECORDS"))[_i16].studentId);
+        bname.push(JSON.parse(localStorage.getItem("STRECORDS"))[_i16].bookName);
+        stname.push(JSON.parse(localStorage.getItem("STRECORDS"))[_i16].studentName);
+        bauthor.push(JSON.parse(localStorage.getItem("STRECORDS"))[_i16].bookAuthor);
       }
     }
 
     console.log(stid, "  ", bname, "  ", bauthor);
 
-    for (var _i18 = 0; _i18 < stid.length; _i18++) {
-      if (stid[_i18] == studentid && stname[_i18] == studentname && bname[_i18] == bookname && bauthor[_i18] == author) {
+    for (var _i17 = 0; _i17 < stid.length; _i17++) {
+      if (stid[_i17] == studentid && stname[_i17] == studentname && bname[_i17] == bookname && bauthor[_i17] == author) {
         /** asdfgf ;lkjhj asdfgf  */
-        a = _i18;
+        a = _i17;
         isrecordinside = true;
         break; // bkdetails.push({"bookName":bookname,"bookAuthor":author,"studentId":studentid,"studentName":studentname})
       } else {
@@ -1301,26 +1292,26 @@ if (location.href == "https://gowthaman9710.github.io/Library-Management-System/
     var backup2;
 
     if (localStorage.getItem("STRECORDS") != null) {
-      for (var _i20 = 0; _i20 < JSON.parse(localStorage.getItem("STRECORDS")).length; _i20++) {
-        console.log(JSON.parse(localStorage.getItem("STRECORDS"))[_i20].studentId, "==", stid, " ", JSON.parse(localStorage.getItem("STRECORDS"))[_i20].studentId == JSON.parse(stid));
+      for (var _i19 = 0; _i19 < JSON.parse(localStorage.getItem("STRECORDS")).length; _i19++) {
+        console.log(JSON.parse(localStorage.getItem("STRECORDS"))[_i19].studentId, "==", stid, " ", JSON.parse(localStorage.getItem("STRECORDS"))[_i19].studentId == JSON.parse(stid));
 
         if (
         /*JSON.parse(localStorage.getItem("STRECORDS")).includes(JSON.parse(stid))*/
-        JSON.parse(localStorage.getItem("STRECORDS"))[_i20].studentId == JSON.parse(stid) == true) {
+        JSON.parse(localStorage.getItem("STRECORDS"))[_i19].studentId == JSON.parse(stid) == true) {
           console.log(JSON.parse(localStorage.getItem("STRECORDS")), "   ", stid);
           idcheck = true;
 
-          if (JSON.parse(localStorage.getItem("STRECORDS"))[_i20].studentName == stname) {
+          if (JSON.parse(localStorage.getItem("STRECORDS"))[_i19].studentName == stname) {
             stnamecheck = true;
 
-            if (JSON.parse(localStorage.getItem("STRECORDS"))[_i20].bookName == bksname) {
+            if (JSON.parse(localStorage.getItem("STRECORDS"))[_i19].bookName == bksname) {
               bknamecheck = true;
-              console.log(JSON.parse(localStorage.getItem("STRECORDS"))[_i20].bookAuthor, "   ", bksauthor);
+              console.log(JSON.parse(localStorage.getItem("STRECORDS"))[_i19].bookAuthor, "   ", bksauthor);
               /** asdfgf ;lkjhj asdfgf */
 
-              if (JSON.parse(localStorage.getItem("STRECORDS"))[_i20].bookAuthor == bksauthor) {
+              if (JSON.parse(localStorage.getItem("STRECORDS"))[_i19].bookAuthor == bksauthor) {
                 authornamecheck = true;
-                idx = _i20;
+                idx = _i19;
                 break;
               } else {
                 if (JSON.parse(localStorage.getItem("STRECORDS")).includes(bksauthor) != true) {
@@ -1385,10 +1376,10 @@ if (location.href == "https://gowthaman9710.github.io/Library-Management-System/
               localStorage.setItem("STRECORDS", JSON.stringify(backup2));
               var bkbackup1 = JSON.parse(localStorage.getItem("books"));
 
-              for (var _i21 = 0; _i21 < JSON.parse(localStorage.getItem("books")).length; _i21++) {
-                if (JSON.parse(localStorage.getItem("books"))[_i21].name == bksname) {
-                  if (JSON.parse(localStorage.getItem("books"))[_i21].author == bksauthor) {
-                    bkbackup1[_i21].quantity += 1;
+              for (var _i20 = 0; _i20 < JSON.parse(localStorage.getItem("books")).length; _i20++) {
+                if (JSON.parse(localStorage.getItem("books"))[_i20].name == bksname) {
+                  if (JSON.parse(localStorage.getItem("books"))[_i20].author == bksauthor) {
+                    bkbackup1[_i20].quantity += 1;
                     localStorage.setItem("books", JSON.stringify(bkbackup1));
                   }
                 }
@@ -1476,12 +1467,12 @@ if (location.href == "https://gowthaman9710.github.io/Library-Management-System/
   var backup1;
 
   if (JSON.parse(localStorage.getItem("RTRECORDS")) != null) {
-    for (var _i19 = 0; _i19 < JSON.parse(localStorage.getItem("RTRECORDS")).length; _i19++) {
+    for (var _i18 = 0; _i18 < JSON.parse(localStorage.getItem("RTRECORDS")).length; _i18++) {
       if (JSON.parse(localStorage.getItem("RTRECORDS")).includes(JSON.stringify(stid)) != true) {
-        if (JSON.parse(localStorage.getItem("RTRECORDS"))[_i19].studentName == stname) {
-          if (JSON.parse(localStorage.getItem("STRECORDS"))[_i19].bookName == bksname) {
-            if (JSON.parse(localStorage.getItem("STRECORDS"))[_i19].bookAuthor == bksauthor) {
-              idxrtdel = _i19;
+        if (JSON.parse(localStorage.getItem("RTRECORDS"))[_i18].studentName == stname) {
+          if (JSON.parse(localStorage.getItem("STRECORDS"))[_i18].bookName == bksname) {
+            if (JSON.parse(localStorage.getItem("STRECORDS"))[_i18].bookAuthor == bksauthor) {
+              idxrtdel = _i18;
             }
           }
         }
@@ -1501,9 +1492,9 @@ if (location.href == "https://gowthaman9710.github.io/Library-Management-System/
   var table = document.getElementById("tab");
   nav();
 
-  for (var _i22 = 0; _i22 < JSON.parse(localStorage.getItem("books")).length; _i22++) {
+  for (var _i21 = 0; _i21 < JSON.parse(localStorage.getItem("books")).length; _i21++) {
     var rows = document.createElement("tr");
-    rows.innerHTML = "<td>".concat(JSON.parse(localStorage.getItem("books"))[_i22].name, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[_i22].author, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[_i22].quantity, "</td>");
+    rows.innerHTML = "<td>".concat(JSON.parse(localStorage.getItem("books"))[_i21].name, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[_i21].author, "</td><td>").concat(JSON.parse(localStorage.getItem("books"))[_i21].quantity, "</td>");
     table.append(rows);
   } // asdfgf ;lkjhj asdfgf ;lkjhj /**  */ //
 
@@ -1519,11 +1510,14 @@ if (location.href == "https://gowthaman9710.github.io/Library-Management-System/
   var idx = usernames.indexOf(localStorage.getItem("currentUser"));
   console.log(idx);
   console.table(backup);
-  if (localStorage.getItem("FNAME").split(",")[idx]) for (var _i23 = 0; _i23 < JSON.parse(localStorage.getItem("allrec")).length; _i23++) {
-    var row = document.createElement("tr");
-    row.innerHTML = "<td>".concat(backup[_i23].date, "</td><td>").concat(backup[_i23].studentId, "</td><td>").concat(backup[_i23].studentName, "</td><td>").concat(backup[_i23].bookName, "</td><td>").concat(backup[_i23].bookAuthor, "</td><td>").concat(backup[_i23].dateOfSubmission, "</td><td>").concat(backup[_i23].status, "</td>");
 
-    _table.append(row);
+  if (localStorage.getItem("FNAME").split(",")[idx]) {
+    if (JSON.parse(localStorage.getItem("allrec")) != null) for (var _i22 = 0; _i22 < JSON.parse(localStorage.getItem("allrec")).length; _i22++) {
+      var row = document.createElement("tr");
+      row.innerHTML = "<td>".concat(backup[_i22].date, "</td><td>").concat(backup[_i22].studentId, "</td><td>").concat(backup[_i22].studentName, "</td><td>").concat(backup[_i22].bookName, "</td><td>").concat(backup[_i22].bookAuthor, "</td><td>").concat(backup[_i22].dateOfSubmission, "</td><td>").concat(backup[_i22].status, "</td>");
+
+      _table.append(row);
+    }
   }
 }
 
