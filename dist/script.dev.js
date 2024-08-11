@@ -115,8 +115,8 @@ function login() {
   }
 
   console.log(localStorage.status);
-  console.log(localStorage.length); //console.log(localStorage.getItem("USERNAMES").split(",").length)
-  // let a=localStorage.getItem("FNAME")
+  console.log(localStorage.length);
+  console.log(localStorage.getItem("USERNAMES").split(",").length); // let a=localStorage.getItem("FNAME")
   // localStorage.setItem("FNAME",`[${a}]`)
 
   function validate() {
@@ -125,29 +125,27 @@ function login() {
     // let dbusers=Array.from(db.keys())
     // let dbvalues=Array.from(db.values())
     // console.log(dbusers,dbvalues)
-    if (localStorage.getItem("USERNAMES") != null) {
-      for (var i = 0; i < localStorage.getItem("USERNAMES").split(",").length; i++) {
-        if (localStorage.getItem("USERNAMES").split(",").includes(user) == true) {
-          useravail = true;
+    for (var i = 0; i < localStorage.getItem("USERNAMES").split(",").length; i++) {
+      if (localStorage.getItem("USERNAMES").split(",").includes(user) == true) {
+        useravail = true;
 
-          if (localStorage.getItem("PASSWORDS").includes(pass) == true) {
-            if (localStorage.getItem("PASSWORDS").split(",")[i] == pass && localStorage.getItem("USERNAMES").split(",")[i] == user) {
-              localStorage.setItem("status", "success");
-              sessionStorage.setItem("validate", "success");
-              localStorage.setItem("currentUser", user); // localStorage.setItem(dbusers[i],dbvalues[i])
+        if (localStorage.getItem("PASSWORDS").includes(pass) == true) {
+          if (localStorage.getItem("PASSWORDS").split(",")[i] == pass && localStorage.getItem("USERNAMES").split(",")[i] == user) {
+            localStorage.setItem("status", "success");
+            sessionStorage.setItem("validate", "success");
+            localStorage.setItem("currentUser", user); // localStorage.setItem(dbusers[i],dbvalues[i])
 
-              flag = true;
-              break;
-            } else {
-              // localStorage.clear()
-              flag = false;
-            }
+            flag = true;
+            break;
           } else {
+            // localStorage.clear()
             flag = false;
           }
         } else {
-          useravail = false;
+          flag = false;
         }
+      } else {
+        useravail = false;
       }
     }
 
@@ -193,7 +191,7 @@ function login() {
 } //-----------------------------HOME-----------------------------//
 
 
-if (location.href == "https://gowthaman9710.github.io/Library-Management-System/main.html") {
+if (location.pathname == "/main.html") {
   nav();
 
   if (localStorage.status != "success" && sessionStorage.validate != "success") {
@@ -392,12 +390,9 @@ function signup() {
   }
 }
 
-if (localStorage.getItem("FNAME") != null) {
-  localStorage.setItem("FNAME", localStorage.getItem("FNAME").split(","));
-} //--------------------------------------
+localStorage.setItem("FNAME", localStorage.getItem("FNAME").split(",")); //--------------------------------------
 //--------------------------------------
 //borrow books
-
 
 console.log(location.href);
 var records1 = [];
@@ -677,7 +672,7 @@ function borrowbooks() {
 
   var current = []; //
 
-  current[0] = localStorage.getItem("records"); //
+  current[0] = localStorage.getItem("records"); //      
 
   localStorage.setItem("current", current[0]); //         
 
@@ -917,6 +912,7 @@ function borrowbooks() {
       var bks;
       var bkscheck = [];
       var authcheck = [];
+      var submitted;
       var strecord = new Map();
       console.log(booknames);
       console.log(bookname); //----------------------------------
@@ -927,7 +923,21 @@ function borrowbooks() {
           bkscheck.push([_i11, booknames[_i11], authornames[_i11], quantities[_i11]]);
           console.log(bkscheck);
         }
-      } //-------------------------------------------------
+      } // for(let i=0;i<bi.length;i++){
+      //     if(booknames.indexOf(booknames[i],i)==bi[i]){
+      //         localStorage.setItem(`bkavail:${bi[i]}`,[1])
+      //         if(authornames.indexOf(author)==bi[i]){
+      //             localStorage.setItem(`authavail:${i}`,[1])
+      //             break
+      //         }
+      //         else{
+      //             localStorage.setItem(`authavail:${i}`,[0])
+      //         }
+      //     }else{
+      //         localStorage.setItem(`bkavail:${i}`,[0])
+      //     }
+      // }
+      //-------------------------------------------------
 
 
       for (var _i12 = 0; _i12 < bkscheck.length; _i12++) {
@@ -959,6 +969,28 @@ function borrowbooks() {
           console.log("author unavailable ", authoravail);
         }
       } //-------------------------------------------------
+      // for(let i=0;i<bkscheck.length;i++){
+      //     if(authornames.indexOf(author)==bkscheck[i][0] && localStorage.getItem(`bkavail:${bi[i]}`)==[1]){
+      //         localStorage.setItem(`authavail:${i}`,[1])
+      //         ai=authornames.indexOf(author)
+      //         authcheck.push([i,authornames[i]])
+      //         console.log(authcheck)
+      //         break
+      //     }else{
+      //         localStorage.setItem(`authavail:${i}`,[0])
+      //     }
+      // }
+      // for(let i=0;i<authornames.length;i++){
+      //         if(localStorage.getItem(`bkavail:${i}`)==[1]){
+      //             localStorage.setItem(`authavail:${i}`,[1])
+      //             if(authornames[i]==author && i==bi){
+      //                 ai=i
+      //             break
+      //             }
+      //         }else{
+      //             localStorage.setItem(`authavail:${i}`,[0])
+      //         }
+      // }
       //----------------------------------------------------
 
 
@@ -974,6 +1006,44 @@ function borrowbooks() {
           console.log("quantity unavailable ", quantityavail);
         }
       } //----------------------------------------------------
+      // for(let i=0;i<bi.length;i++){
+      //             if(quantities[bi[i]]>=1 && ai==i){
+      //                 localStorage.setItem(`quavail:${ai}`,[1])
+      //                 break
+      //             }else{
+      //                 localStorage.setItem(`quavail:${ai}`,[0])
+      //             }
+      //         }
+      //----------------------------------------------------
+      // for(let i=0;i<booknames.length;i++){
+      // if(localStorage.getItem(`bkavail:${i}`)==[1]){
+      //     bookavail=[i,"success"]
+      //     console.log("book available ",bookavail)
+      // }else if(localStorage.getItem(`bkavail:${i}`)==[0]){
+      //     bookavail=[i,"failure"]
+      //     console.log("book unavailable ",bookavail)
+      // }
+      // }
+      // for(let i=0;i<authornames.length;i++){
+      //     if(localStorage.getItem(`authavail:${i}`)==[1]){
+      // authoravail=[i,"success"]
+      // console.log("author available ",authoravail)
+      //         break
+      //     }else if(localStorage.getItem(`authavail:${i}`)==[0]){
+      //         authoravail=[i,"failure"]
+      //         console.log("author unavailable ",authoravail)
+      //     }
+      // }
+      // for(let i=0;i<quantities.length;i++){
+      //         if(localStorage.getItem(`quavail:${i}`)==[1]){
+      //             quantityavail=[i,"success"]
+      //             console.log("quantity available ",quantityavail)
+      //             break
+      // }else if(localStorage.getItem(`quavail:${i}`)==[0]){
+      //     quantityavail=[i,"failure"]
+      //     console.log("quantity unavailable ",quantityavail)
+      // }
+      // }
       // ---------------------------------------------------
 
 
@@ -1364,6 +1434,8 @@ if (location.href == "http://127.0.0.1:5500/return.html" || location.href == "ht
     }
   }; // asdfgf ;lkjhj asdfgf ;lkjhj 
   //ends
+
+  /** asdfgf ;lkjhj  */
 
 
   bookdbcreation();

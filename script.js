@@ -101,8 +101,7 @@ if(localStorage.status=="success" && sessionStorage.validate=="success"){
 }
 console.log(localStorage.status)
 console.log(localStorage.length)
-
-//console.log(localStorage.getItem("USERNAMES").split(",").length)
+console.log(localStorage.getItem("USERNAMES").split(",").length)
 // let a=localStorage.getItem("FNAME")
 // localStorage.setItem("FNAME",`[${a}]`)
 
@@ -113,7 +112,6 @@ function validate(){
     // let dbusers=Array.from(db.keys())
     // let dbvalues=Array.from(db.values())
     // console.log(dbusers,dbvalues)
-if(localStorage.getItem("USERNAMES")!=null){
 for(let i=0;i<localStorage.getItem("USERNAMES").split(",").length;i++){
 if(localStorage.getItem("USERNAMES").split(",").includes(user)==true){
     useravail=true
@@ -136,7 +134,6 @@ else{
 }else{
      
     useravail=false
-}
 }
 }
 if(useravail==true){
@@ -183,7 +180,7 @@ if(localStorage.status=="success"){
 
 
 //-----------------------------HOME-----------------------------//
-if(location.href=="https://gowthaman9710.github.io/Library-Management-System/main.html"){
+if(location.pathname=="/main.html"){
     nav()
      if(localStorage.status!="success" && sessionStorage.validate!="success"){
         location.href="http://127.0.0.1:5500/login.html"
@@ -361,9 +358,7 @@ if(sessionStorage.validate=="success" && localStorage.getItem(user1a)==pass1a){
     },7000)
 }
 }
-if(localStorage.getItem("FNAME")!=null){
 localStorage.setItem("FNAME",localStorage.getItem("FNAME").split(","))
-}
 //--------------------------------------
 //--------------------------------------
 //borrow books
@@ -636,7 +631,7 @@ console.log(localStorage.getItem(1))
 let val
 ///////////////////////////////////////////////////////////
 let current=[]                                            //
-current[0]=localStorage.getItem("records")                 //
+current[0]=localStorage.getItem("records")                 //      
 localStorage.setItem("current",current[0])                  //         
 console.log(current)                                        //
 if(current[0]<localStorage.getItem("current")){             //
@@ -857,6 +852,7 @@ function submitBook(){
     let bks
     let bkscheck=[]
     let authcheck=[]
+    let submitted
     let strecord=new Map()
     console.log(booknames)
     console.log(bookname)
@@ -868,7 +864,20 @@ function submitBook(){
             console.log(bkscheck)
         }
     }
-
+    // for(let i=0;i<bi.length;i++){
+    //     if(booknames.indexOf(booknames[i],i)==bi[i]){
+    //         localStorage.setItem(`bkavail:${bi[i]}`,[1])
+    //         if(authornames.indexOf(author)==bi[i]){
+    //             localStorage.setItem(`authavail:${i}`,[1])
+    //             break
+    //         }
+    //         else{
+    //             localStorage.setItem(`authavail:${i}`,[0])
+    //         }
+    //     }else{
+    //         localStorage.setItem(`bkavail:${i}`,[0])
+    //     }
+    // }
     //-------------------------------------------------
     for(let i=0;i<bkscheck.length;i++){
         if(bkscheck[i][1]==bookname){
@@ -899,7 +908,29 @@ function submitBook(){
         }
     }
     //-------------------------------------------------
- 
+    // for(let i=0;i<bkscheck.length;i++){
+    //     if(authornames.indexOf(author)==bkscheck[i][0] && localStorage.getItem(`bkavail:${bi[i]}`)==[1]){
+    //         localStorage.setItem(`authavail:${i}`,[1])
+    //         ai=authornames.indexOf(author)
+    //         authcheck.push([i,authornames[i]])
+    //         console.log(authcheck)
+    //         break
+    //     }else{
+    //         localStorage.setItem(`authavail:${i}`,[0])
+    //     }
+    // }
+    
+    // for(let i=0;i<authornames.length;i++){
+    //         if(localStorage.getItem(`bkavail:${i}`)==[1]){
+    //             localStorage.setItem(`authavail:${i}`,[1])
+    //             if(authornames[i]==author && i==bi){
+    //                 ai=i
+    //             break
+    //             }
+    //         }else{
+    //             localStorage.setItem(`authavail:${i}`,[0])
+    //         }
+    // }
     //----------------------------------------------------
     for(let i=0;i<bkscheck.length;i++){
         if(bkscheck[i][3]>=1){
@@ -914,7 +945,46 @@ function submitBook(){
         }
     }
     //----------------------------------------------------
-
+    // for(let i=0;i<bi.length;i++){
+    //             if(quantities[bi[i]]>=1 && ai==i){
+    //                 localStorage.setItem(`quavail:${ai}`,[1])
+    //                 break
+    //             }else{
+    //                 localStorage.setItem(`quavail:${ai}`,[0])
+    //             }
+    //         }
+    
+    
+    //----------------------------------------------------
+    // for(let i=0;i<booknames.length;i++){
+    // if(localStorage.getItem(`bkavail:${i}`)==[1]){
+    //     bookavail=[i,"success"]
+    //     console.log("book available ",bookavail)
+    // }else if(localStorage.getItem(`bkavail:${i}`)==[0]){
+    //     bookavail=[i,"failure"]
+    //     console.log("book unavailable ",bookavail)
+    // }
+    // }
+    // for(let i=0;i<authornames.length;i++){
+    //     if(localStorage.getItem(`authavail:${i}`)==[1]){
+            // authoravail=[i,"success"]
+            // console.log("author available ",authoravail)
+    //         break
+    //     }else if(localStorage.getItem(`authavail:${i}`)==[0]){
+    //         authoravail=[i,"failure"]
+    //         console.log("author unavailable ",authoravail)
+    //     }
+    // }
+    // for(let i=0;i<quantities.length;i++){
+    //         if(localStorage.getItem(`quavail:${i}`)==[1]){
+    //             quantityavail=[i,"success"]
+    //             console.log("quantity available ",quantityavail)
+    //             break
+    // }else if(localStorage.getItem(`quavail:${i}`)==[0]){
+    //     quantityavail=[i,"failure"]
+    //     console.log("quantity unavailable ",quantityavail)
+    // }
+    // }
     // ---------------------------------------------------
     
     let newptag1=document.createElement("p")
@@ -1323,7 +1393,7 @@ if(localStorage.getItem("STRECORDS")!=null){
    }
 // asdfgf ;lkjhj asdfgf ;lkjhj 
 //ends
-
+/** asdfgf ;lkjhj  */
 }
 //inventory
 if(location.href=="http://127.0.0.1:5500/inventory.html" || location.href=="http://127.0.0.1:5500/inventory.html#"){
