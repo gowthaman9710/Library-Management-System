@@ -5,6 +5,7 @@
     z-index: 2;
     height:7vh;
     display: flex;
+    max-width: 100vw;
     justify-content:space-around;
     position:sticky;
     margin-top: -1.3vh;/*-8px*/
@@ -208,7 +209,7 @@ font-size: 20px;
     padding: 2px;
 } */
 #log{
-    background-color:blueviolet;
+    background-color:rgb(255, 255, 255);
     width: 50vw;
     height:55vh;
     margin-left: 25vw;
@@ -550,8 +551,10 @@ font-size: 20px;
 #homeabook{
   width:40vw;
   height: 80vh;
+  position: relative;
+  z-index: 1;
   border-radius: 10px;
-  background-color: rgb(212, 0, 255);
+  background-color: rgb(252, 252, 252);
   margin-left:30vw;
   margin-top: 10vh;
   padding-left: 20px;
@@ -609,7 +612,51 @@ font-size: 20px;
     background-color: rgba(220, 20, 60, 0.596);
     border: 2px solid rgba(220, 20, 60, 0.595);
 }
-
+#design2{
+    width: 100vw;
+    height: 93vh;
+    position:absolute;
+    max-height: 93vh;
+    margin-top: 7vh;
+    max-width: 99vw;
+    z-index:0;
+    background-color: rgb(28, 0, 128); 
+    background-color: rgba(165, 42, 124, 0.651); 
+      /* background-color: black; */
+    display:grid;
+    justify-content:space-between;
+    grid-template-columns:auto auto auto auto auto auto auto;
+    left:0px;
+    top: 0px;
+  }
+  body{
+    overflow-x: hidden;
+  }
+  #design2 span{
+    border:3px solid rgb(28, 0, 128);
+    background-color: rgba(165, 42, 124, 0.651);      
+    /* background-color: rgba(0, 0, 0, 0.021);  */
+    width: 13.70vw;
+    height: 15.75vh;
+    display:grid;
+    transition: 0s all;
+    animation-duration:10s;
+    animation-name: bg;
+    animation-iteration-count:infinite;
+    border:2px solid rgb(255, 255, 255);
+    border:2px solid black;
+    animation-delay: 2s;
+  }
+  #design2 span:hover{
+    background-color: cornflowerblue;
+    background-color: rgb(228, 140, 140);
+    transform: scale(110%,102%,102%);
+    box-shadow: 1px 1px 10px 10px white;
+    transform:rotateX(180deg);
+  }
+  #design2 span:focus{
+    background-color: aqua;
+  }
 
 /* return book page */
 
@@ -617,7 +664,9 @@ font-size: 20px;
     width:40vw;
   height: 80vh;
   border-radius: 10px;
-  background-color: rgb(212, 0, 255);
+  position: relative;
+  z-index: 1;
+  background-color: rgb(255, 255, 255);
   margin-left:30vw;
   margin-top: 10vh;
   padding-left: 20px;   
@@ -655,11 +704,19 @@ font-size: 20px;
     margin-top: 20px;
     width: 75vw;
 }
+#infotable{
+  position: relative;
+  z-index: 1;
+  width: 0vw;
+  background-color: aqua;
+}
 #tab{
+  border: 3px solid red;
+  background-color: antiquewhite;
+    margin-top: 12vh;
+    margin-left: 12.5vw;
     width: 75vw;
     height: 70vh;
-    margin-left: 12vw;
-    margin-top: 13vh;
     text-align: center;
 }
 #tab tr{
@@ -670,4 +727,72 @@ font-size: 20px;
 }
 #tab td{
     border: 1px solid black;
+}
+
+/* HISTORY */
+#historybody{
+  background-color:rgba(165, 42, 124, 0.651);
+}
+#table{
+  position: static;
+  z-index: 1;
+  width: 0vw;
+  background-color: aqua;
+}
+#tab2{
+  border: 3px solid red;
+  background-color: antiquewhite;
+  margin-top: 12vh;
+  margin-top: 2vh;
+  margin-left: 12.5vw;
+  margin-left: 0vw;
+  width: 100vw;
+  height: auto;
+  text-align: center;
+}
+#tab2 tr{
+  border: 1px solid black;
+}
+#tab2 th{
+    border: 1px solid black;
+}
+#tab2 td{
+    border: 1px solid black;
+}
+
+/* explore */
+#main1 a{
+  margin-top: 9vh;
+   position: absolute;
+   bottom: 10px;
+}
+#main2 a{
+  margin-top: 9vh;
+   position: absolute;
+   bottom: 10px;
+}
+#explorebody h1{
+  margin-left: 20px;
+  margin-top: 20px;
+}
+#explorebody a{
+ margin-left: 20px;
+}
+.card{
+  margin-top: 5vh;
+}
+#card{
+  height: 95vh;
+}
+#card img{
+  margin-top: 0vh;
+   height: 50vh;
+}
+#main1{
+  display: grid;
+  grid-template-columns: 55vh 55vh 55vh 55vh;
+}
+#main2{
+  display: grid;
+  grid-template-columns: 55vh 55vh 55vh 55vh;
 }
