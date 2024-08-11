@@ -180,7 +180,7 @@ if(localStorage.status=="success"){
 
 
 //-----------------------------HOME-----------------------------//
-if(location.pathname=="/main.html"){
+if(location.pathname=="/Library-Management-System/main.html"){
     nav()
      if(localStorage.status!="success" && sessionStorage.validate!="success"){
         location.href="https://gowthaman9710.github.io/Library-Management-System/login.html"

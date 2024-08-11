@@ -191,7 +191,7 @@ function login() {
 } //-----------------------------HOME-----------------------------//
 
 
-if (location.pathname == "/main.html") {
+if (location.pathname == "/Library-Management-System/main.html") {
   nav();
 
   if (localStorage.status != "success" && sessionStorage.validate != "success") {
