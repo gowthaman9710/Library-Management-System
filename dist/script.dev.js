@@ -155,7 +155,7 @@ function login() {
         warning.classList.add("successlog");
         warning.innerHTML = "<p>LOGIN SUCCESSFUL</p>";
         setTimeout(function () {
-          location.href = "/main.html";
+          location.href = "https://gowthaman9710.github.io/Library-Management-System/main.html";
         }, 3000);
       } else {
         if (pass == null || pass == undefined || pass == " ") {
